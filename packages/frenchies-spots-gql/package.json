@@ -20,10 +20,9 @@
     "@graphql-codegen/cli": "^5.0.0",
     "@graphql-codegen/client-preset": "^4.1.0",
     "codegen": "^0.1.0",
-    "fs": "0.0.1-security",
     "generate": "^0.14.0",
     "graphql": "^16.8.0",
-    "graphql.macro": "^1.4.2",
-    "path": "^0.12.7"
+    "graphql-tag": "^2.12.6",
+    "graphql.macro": "^1.4.2"
   }
 }
