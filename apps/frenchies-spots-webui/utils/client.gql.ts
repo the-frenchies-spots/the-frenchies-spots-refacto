@@ -1,8 +1,8 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 
-const TOKEN_STORAGE_KEY = process.env.TOKEN_STORAGE_KEY || "";
-const API_URL = process.env.API_URL || "";
+const TOKEN_STORAGE_KEY = process.env.NEXT_TOKEN_STORAGE_KEY || "";
+const API_URL = process.env.NEXT_API_PROD_URL || "";
 
 const httpLink = createHttpLink({
   uri: API_URL,
