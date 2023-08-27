@@ -2,16 +2,17 @@
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local", ".env"],
   "globalEnv": [
-    "API_URL",
+    "NEXT_API_URL",
     "DATABASE_URL",
-    "MAPBOX_API_URL",
+    "NEXT_MAPBOX_API_URL",
     "SHADOW_DATABASE_URL",
     "SECRET_KEY",
-    "MAPBOX_API_KEY",
+    "NEXT_MAPBOX_API_KEY",
     "STRIPE_PUBLIC_KEY",
-    "TOKEN_STORAGE_KEY",
+    "NEXT_TOKEN_STORAGE_KEY",
     "ACCESS_TOKEN_SECRET",
-    "REFRESH_TOKEN_SECRET"
+    "REFRESH_TOKEN_SECRET",
+    "NEXT_API_PROD_URL"
   ],
   "pipeline": {
     "build": {
@@ -22,16 +23,17 @@
       "cache": false,
       "persistent": true,
       "env": [
-        "API_URL",
+        "NEXT_API_URL",
         "DATABASE_URL",
-        "MAPBOX_API_URL",
+        "NEXT_MAPBOX_API_URL",
         "SHADOW_DATABASE_URL",
         "SECRET_KEY",
-        "MAPBOX_API_KEY",
+        "NEXT_MAPBOX_API_KEY",
         "STRIPE_PUBLIC_KEY",
-        "TOKEN_STORAGE_KEY",
+        "NEXT_TOKEN_STORAGE_KEY",
         "ACCESS_TOKEN_SECRET",
-        "REFRESH_TOKEN_SECRET"
+        "REFRESH_TOKEN_SECRET",
+        "NEXT_API_PROD_URL"
       ]
     },
     "lint": {},

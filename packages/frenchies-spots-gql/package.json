@@ -23,6 +23,7 @@
     "fs": "0.0.1-security",
     "generate": "^0.14.0",
     "graphql": "^16.8.0",
+    "graphql.macro": "^1.4.2",
     "path": "^0.12.7"
   }
 }
