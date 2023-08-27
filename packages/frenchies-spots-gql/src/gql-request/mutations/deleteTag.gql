@@ -1,5 +1,0 @@
-mutation deleteTag($id: String!){
-    deleteTag(id: $id){
-        deleted
-    }
-}

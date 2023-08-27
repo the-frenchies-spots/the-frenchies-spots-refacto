@@ -1,5 +1,0 @@
-mutation deleteSpot($id: String!){
-    deleteSpot(id: $id){
-        deleted
-    }
-}

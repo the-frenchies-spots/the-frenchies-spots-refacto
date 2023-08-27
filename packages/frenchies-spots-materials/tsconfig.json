@@ -1,5 +1,0 @@
-{
-  "extends": "tsconfig/react-library.json",
-  "include": ["src", "../dots-ui/src/connect/ConnectCards"],
-  "exclude": ["dist", "build", "node_modules"]
-}

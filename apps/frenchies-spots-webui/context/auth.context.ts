@@ -1,14 +1,10 @@
 import { createContext } from "react";
 
-// import type {
-//   UserEntity,
-//   SignInInput,
-//   SignUpInput,
-// } from "@frenchies-spots/gql";
-
-type UserEntity = null;
-type SignInInput = null;
-type SignUpInput = null;
+import type {
+  UserEntity,
+  SignInInput,
+  SignUpInput,
+} from "@frenchies-spots/gql";
 
 interface AuthContextData {
   token: string | null;

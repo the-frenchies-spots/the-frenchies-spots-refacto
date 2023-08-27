@@ -3,6 +3,7 @@
 const withPWA = require("next-pwa");
 
 const nextConfig = {
+  reactStrictMode: true,
   ...withPWA({
     dest: "public",
     register: true,
@@ -11,16 +12,7 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
-  transpilePackages: ["@frenchies-spots/material"],
-  webpack: (config) => {
-    config.module.rules.push({
-      test: /\.(graphql|gql)/,
-      exclude: /node_modules/,
-      loader: "graphql-tag/loader",
-    });
-
-    return config;
-  },
+  transpilePackages: ["@frenchies-spots/material", "@frenchies-spots/gql"],
   images: {
     domains: [
       "res.cloudinary.com",
@@ -39,7 +31,3 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
-
-module.exports = withPWA({
-  // next.js config
-});

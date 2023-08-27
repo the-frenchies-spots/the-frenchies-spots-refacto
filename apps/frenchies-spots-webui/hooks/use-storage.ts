@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type UseStorage = {
   value: string | null;
@@ -6,9 +6,11 @@ type UseStorage = {
 };
 
 const useStorage = (storageKey: string): UseStorage => {
-  const [value, setValue] = useState<string | null>(
-    localStorage.getItem(storageKey)
-  );
+  const [value, setValue] = useState<string | null>(null);
+
+  useEffect(() => {
+    localStorage.getItem(storageKey);
+  }, []);
 
   const updateValue = async (newValue: string): Promise<void> => {
     try {

@@ -1,11 +1,17 @@
-import { DocumentNode } from "graphql";
-import { loader } from "graphql.macro";
+import { gql, DocumentNode } from "@apollo/client";
+
+import { getLoginUser } from "./getLoginUser";
+import { spotByPk } from "./spotByPk";
+import { spots } from "./spots";
+import { spotsProfile } from "./spotsProfile";
+import { tagByPk } from "./tagByPk";
+import { tags } from "./tags";
 
 export const queries: Record<string, DocumentNode> = {
-  getLoginUser: loader("./getLoginUser.gql"),
-  spotByPk: loader("./spotByPk.gql"),
-  spots: loader("./spots.gql"),
-  spotsProfile: loader("./spotsProfile.gql"),
-  tagByPk: loader("./tagByPk.gql"),
-  tags: loader("./tags.gql"),
+  getLoginUser,
+  spotByPk,
+  spots,
+  spotsProfile,
+  tagByPk,
+  tags,
 };

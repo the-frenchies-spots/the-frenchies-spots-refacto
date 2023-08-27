@@ -1,6 +1,0 @@
-mutation getNewTokens{
-    getNewTokens{
-        accessToken
-        refreshToken
-    }
-}

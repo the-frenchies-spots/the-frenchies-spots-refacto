@@ -1,5 +1,0 @@
-mutation logout($id: String!){
-    logout(id: $id){
-        loggedOut
-    }
-}

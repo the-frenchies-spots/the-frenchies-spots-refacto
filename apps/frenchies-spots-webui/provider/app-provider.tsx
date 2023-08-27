@@ -10,9 +10,7 @@ interface AppProviderProps {
 export function AppProvider({ children }: AppProviderProps) {
   return (
     <GraphqlProvider>
-      {/* <AuthProvider> */}
-      {children}
-      {/* </AuthProvider> */}
+      <AuthProvider>{children}</AuthProvider>
     </GraphqlProvider>
   );
 }
