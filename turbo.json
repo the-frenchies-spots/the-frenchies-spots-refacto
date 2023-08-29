@@ -12,7 +12,8 @@
     "NEXT_TOKEN_STORAGE_KEY",
     "ACCESS_TOKEN_SECRET",
     "REFRESH_TOKEN_SECRET",
-    "NEXT_API_PROD_URL"
+    "NEXT_API_PROD_URL",
+    "NEXT_PUBLIC_API_URL"
   ],
   "pipeline": {
     "build": {
@@ -33,7 +34,8 @@
         "NEXT_TOKEN_STORAGE_KEY",
         "ACCESS_TOKEN_SECRET",
         "REFRESH_TOKEN_SECRET",
-        "NEXT_API_PROD_URL"
+        "NEXT_API_PROD_URL",
+        "NEXT_PUBLIC_API_URL"
       ]
     },
     "lint": {},

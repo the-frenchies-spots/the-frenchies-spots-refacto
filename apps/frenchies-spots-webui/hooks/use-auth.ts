@@ -21,12 +21,15 @@ export const useAuth = () => {
   const [signIn] = useMutation<SignResponse, SignInInput>(mutations.signIn);
   const [getLoginUser] = useLazyQuery<UserEntity>(queries.getLoginUser);
   const [signOut] = useMutation<LogoutResponse>(mutations.logout);
+
   const { value: tokenStorage, updateValue: updateToken } =
     useStorage(TOKEN_STORAGE_KEY);
+
   const authentification = (user: UserEntity | undefined, token?: string) => {
     if (token) updateToken(token);
     if (user) setUser(user);
   };
+
   const handleSignUp = async (variables: SignUpInput): Promise<void> => {
     signUp({ variables })
       .then((signResponse) => {
@@ -39,6 +42,7 @@ export const useAuth = () => {
         console.error(error);
       });
   };
+
   const handleSignIn = async (variables: SignInInput): Promise<void> => {
     signIn({ variables })
       .then((signResponse) => {
@@ -51,6 +55,7 @@ export const useAuth = () => {
         console.error(error);
       });
   };
+
   const handleAuthByToken = async (): Promise<void> => {
     getLoginUser()
       .then((logUserResponse) => {
@@ -61,6 +66,7 @@ export const useAuth = () => {
         console.error(error);
       });
   };
+
   const handleSignOut = async (): Promise<void> => {
     signOut()
       .then(() => {
@@ -69,6 +75,7 @@ export const useAuth = () => {
       })
       .catch(console.log);
   };
+
   return {
     token: tokenStorage,
     user,
