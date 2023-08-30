@@ -11,7 +11,7 @@ import type {
   LogoutResponse,
 } from "@frenchies-spots/gql";
 
-const TOKEN_STORAGE_KEY = process.env.TOKEN_STORAGE_KEY || "";
+const TOKEN_STORAGE_KEY = process.env.NEXT_PUBLIC_TOKEN_STORAGE_KEY || "";
 
 import useStorage from "./use-storage";
 

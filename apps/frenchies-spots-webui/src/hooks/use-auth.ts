@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import { mutations, queries } from "@frenchies-spots/gql";
 import { useMutation, useLazyQuery } from "@apollo/client";
@@ -9,16 +9,24 @@ import type {
   SignInInput,
   SignUpInput,
   LogoutResponse,
+  MutationSignUpArgs,
+  Mutation,
+  MutationSignInArgs,
 } from "@frenchies-spots/gql";
 
-const TOKEN_STORAGE_KEY = process.env.TOKEN_STORAGE_KEY || "";
+const TOKEN_STORAGE_KEY = process.env.NEXT_PUBLIC_TOKEN_STORAGE_KEY || "";
 
 import useStorage from "./use-storage";
+import { AuthContext } from "@/context";
 
-export const useAuth = () => {
+export const useInitAuth = () => {
   const [user, setUser] = useState<UserEntity>();
-  const [signUp] = useMutation<SignResponse, SignUpInput>(mutations.signUp);
-  const [signIn] = useMutation<SignResponse, SignInInput>(mutations.signIn);
+  const [signUp] = useMutation<{ signUp: SignResponse }, MutationSignUpArgs>(
+    mutations.signUp
+  );
+  const [signIn] = useMutation<{ signIn: SignResponse }, MutationSignInArgs>(
+    mutations.signIn
+  );
   const [getLoginUser] = useLazyQuery<UserEntity>(queries.getLoginUser);
   const [signOut] = useMutation<LogoutResponse>(mutations.logout);
 
@@ -30,12 +38,12 @@ export const useAuth = () => {
     if (user) setUser(user);
   };
 
-  const handleSignUp = async (variables: SignUpInput): Promise<void> => {
-    signUp({ variables })
+  const handleSignUp = async (signUpInput: SignUpInput): Promise<void> => {
+    signUp({ variables: { signUpInput } })
       .then((signResponse) => {
         authentification(
-          signResponse.data?.user,
-          signResponse.data?.refreshToken
+          signResponse?.data?.signUp?.user,
+          signResponse?.data?.signUp?.refreshToken
         );
       })
       .catch((error) => {
@@ -43,12 +51,12 @@ export const useAuth = () => {
       });
   };
 
-  const handleSignIn = async (variables: SignInInput): Promise<void> => {
-    signIn({ variables })
+  const handleSignIn = async (signInInput: SignInInput): Promise<void> => {
+    signIn({ variables: { signInInput } })
       .then((signResponse) => {
         authentification(
-          signResponse.data?.user,
-          signResponse.data?.refreshToken
+          signResponse?.data?.signIn?.user,
+          signResponse?.data?.signIn?.refreshToken
         );
       })
       .catch((error) => {
@@ -84,4 +92,30 @@ export const useAuth = () => {
     sessionLogin: handleAuthByToken,
     onSignOut: handleSignOut,
   };
+};
+
+export const useAuthContext = () => {
+  const ctx = useContext(AuthContext);
+  if (!ctx) {
+    throw new Error("Sorry but no context found.");
+  }
+  return ctx;
+};
+
+export const useAuth = () => {
+  const { currentUser, processSignUp, processSignIn } = useAuthContext();
+
+  const handleSignUp = (signUpInput: SignUpInput) => {
+    if (typeof processSignUp === "function") {
+      processSignUp(signUpInput);
+    }
+  };
+
+  const handleSignIn = (signInInput: SignInInput) => {
+    if (typeof processSignIn === "function") {
+      processSignIn(signInInput);
+    }
+  };
+
+  return { user: currentUser, onSignUp: handleSignUp, onSignIn: handleSignIn };
 };

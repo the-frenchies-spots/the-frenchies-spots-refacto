@@ -10,7 +10,7 @@ interface AuthContextData {
   token: string | null;
   currentUser: UserEntity | undefined;
   processSignIn: ((variables: SignInInput) => Promise<void>) | undefined;
-  processSignUp: ((variables: SignUpInput) => Promise<void>) | undefined;
+  processSignUp: ((signUpInput: SignUpInput) => Promise<void>) | undefined;
   processSignOut: (() => Promise<void>) | undefined;
 }
 

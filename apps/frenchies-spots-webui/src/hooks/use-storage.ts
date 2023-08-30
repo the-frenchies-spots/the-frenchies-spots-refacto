@@ -9,12 +9,13 @@ const useStorage = (storageKey: string): UseStorage => {
   const [value, setValue] = useState<string | null>(null);
 
   useEffect(() => {
-    localStorage.getItem(storageKey);
+    const localToken = localStorage.getItem(storageKey);
+    setValue(localToken);
   }, []);
 
   const updateValue = async (newValue: string): Promise<void> => {
     try {
-      await localStorage.setItem(storageKey, newValue);
+      localStorage.setItem(storageKey, newValue);
       setValue(newValue);
     } catch (err) {
       console.error(err);

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { AuthContext } from "../context";
 import { useAuth } from "../hooks";
 
-const TOKEN_STORAGE_KEY = process.env.TOKEN_STORAGE_KEY || "";
+const TOKEN_STORAGE_KEY = process.env.NEXT_PUBLIC_TOKEN_STORAGE_KEY || "";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 

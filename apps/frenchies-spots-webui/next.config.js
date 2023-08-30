@@ -12,21 +12,13 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
-  transpilePackages: ["@frenchies-spots/material", "@frenchies-spots/gql"],
+  transpilePackages: [
+    "@frenchies-spots/material",
+    "@frenchies-spots/gql",
+    "@frenchies-spots/hooks",
+  ],
   images: {
-    domains: [
-      "res.cloudinary.com",
-      "cdn.dribbble.com",
-      "upload.wikMedia.org",
-      "bubbleplan.net",
-      "encrypted-tbn0.gstatic.com",
-      "cdn-icons-png.flaticon.com",
-      "100k-faces.glitch.me",
-      "images.unsplash.com",
-      "us.123rf.com",
-      "www.w3schools.com",
-      "apprendre-la-photo.fr",
-    ],
+    domains: ["res.cloudinary.com"],
   },
 };
 
