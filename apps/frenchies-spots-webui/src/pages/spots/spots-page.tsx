@@ -4,7 +4,7 @@ import { Box, Button } from "@frenchies-spots/material";
 import { queries, SpotEntity, SpotsInput } from "@frenchies-spots/gql";
 import { useQuery } from "@apollo/client";
 
-const Spot = () => {
+const SpotsPage = () => {
   const { data } = useQuery<
     { spots: SpotEntity[] },
     { spotsInput: SpotsInput }
@@ -27,4 +27,4 @@ const Spot = () => {
   );
 };
 
-export default Spot;
+export default SpotsPage;

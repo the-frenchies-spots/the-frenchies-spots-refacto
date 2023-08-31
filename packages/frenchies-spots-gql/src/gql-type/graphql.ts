@@ -87,11 +87,6 @@ export type MutationInsertTagArgs = {
 };
 
 
-export type MutationLogoutArgs = {
-  id: Scalars['String']['input'];
-};
-
-
 export type MutationSignInArgs = {
   signInInput: SignInInput;
 };

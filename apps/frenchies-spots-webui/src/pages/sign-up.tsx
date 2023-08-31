@@ -7,12 +7,13 @@ import {
   TextInput,
   Button,
   Log,
+  LoadingOverlay,
 } from "@frenchies-spots/material";
 import { SignUpInput } from "@frenchies-spots/gql";
 import { useAuth } from "@/hooks";
 
 const SignUp = () => {
-  const { user, onSignUp } = useAuth();
+  const { user, loading, onSignUp } = useAuth();
 
   const form = useForm<SignUpInput>({
     initialValues: {
@@ -36,6 +37,7 @@ const SignUp = () => {
 
   return (
     <Container size="sm">
+      <LoadingOverlay visible={loading} overlayBlur={2} />
       <Log value={{ user }} />
       <Paper p="lg" shadow="xs" style={{ maxWidth: 400, margin: "0 auto" }}>
         <form onSubmit={handleSubmit}>

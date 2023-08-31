@@ -21,14 +21,20 @@ import { AuthContext } from "@/context";
 
 export const useInitAuth = () => {
   const [user, setUser] = useState<UserEntity>();
-  const [signUp] = useMutation<{ signUp: SignResponse }, MutationSignUpArgs>(
-    mutations.signUp
-  );
-  const [signIn] = useMutation<{ signIn: SignResponse }, MutationSignInArgs>(
-    mutations.signIn
-  );
+  const [signUp, { loading: signupLoading }] = useMutation<
+    { signUp: SignResponse },
+    MutationSignUpArgs
+  >(mutations.signUp);
+
+  const [signIn, { loading: signinLoading }] = useMutation<
+    { signIn: SignResponse },
+    MutationSignInArgs
+  >(mutations.signIn);
+
   const [getLoginUser] = useLazyQuery<UserEntity>(queries.getLoginUser);
-  const [signOut] = useMutation<LogoutResponse>(mutations.logout);
+  const [signOut, { loading: signoutLoading }] = useMutation<LogoutResponse>(
+    mutations.logout
+  );
 
   const { value: tokenStorage, updateValue: updateToken } =
     useStorage(TOKEN_STORAGE_KEY);
@@ -54,12 +60,15 @@ export const useInitAuth = () => {
   const handleSignIn = async (signInInput: SignInInput): Promise<void> => {
     signIn({ variables: { signInInput } })
       .then((signResponse) => {
+        console.log({ signResponse });
         authentification(
           signResponse?.data?.signIn?.user,
           signResponse?.data?.signIn?.refreshToken
         );
       })
       .catch((error) => {
+        console.log({ error });
+
         console.error(error);
       });
   };
@@ -87,9 +96,10 @@ export const useInitAuth = () => {
   return {
     token: tokenStorage,
     user,
+    loading: signupLoading || signinLoading || signoutLoading,
     onSignUp: handleSignUp,
     onSignIn: handleSignIn,
-    sessionLogin: handleAuthByToken,
+    refresh: handleAuthByToken,
     onSignOut: handleSignOut,
   };
 };
@@ -103,7 +113,14 @@ export const useAuthContext = () => {
 };
 
 export const useAuth = () => {
-  const { currentUser, processSignUp, processSignIn } = useAuthContext();
+  const {
+    currentUser,
+    loading,
+    processSignUp,
+    processSignIn,
+    processSignOut,
+    refresh,
+  } = useAuthContext();
 
   const handleSignUp = (signUpInput: SignUpInput) => {
     if (typeof processSignUp === "function") {
@@ -117,5 +134,25 @@ export const useAuth = () => {
     }
   };
 
-  return { user: currentUser, onSignUp: handleSignUp, onSignIn: handleSignIn };
+  const handleSignOut = () => {
+    if (typeof processSignOut === "function") {
+      processSignOut();
+    }
+  };
+
+  const handleRefresh = () => {
+    if (typeof refresh === "function") {
+      refresh();
+    }
+  };
+
+  return {
+    user: currentUser,
+    loading,
+    authenticated: currentUser !== undefined,
+    refresh: handleRefresh,
+    onSignUp: handleSignUp,
+    onSignIn: handleSignIn,
+    onSignOut: handleSignOut,
+  };
 };

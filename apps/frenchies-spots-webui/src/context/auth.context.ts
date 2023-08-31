@@ -8,7 +8,9 @@ import type {
 
 interface AuthContextData {
   token: string | null;
+  loading: boolean;
   currentUser: UserEntity | undefined;
+  refresh: (() => Promise<void>) | undefined;
   processSignIn: ((variables: SignInInput) => Promise<void>) | undefined;
   processSignUp: ((signUpInput: SignUpInput) => Promise<void>) | undefined;
   processSignOut: (() => Promise<void>) | undefined;
@@ -16,7 +18,9 @@ interface AuthContextData {
 
 const defaultContext: AuthContextData = {
   token: null,
+  loading: false,
   currentUser: undefined,
+  refresh: undefined,
   processSignIn: undefined,
   processSignUp: undefined,
   processSignOut: undefined,

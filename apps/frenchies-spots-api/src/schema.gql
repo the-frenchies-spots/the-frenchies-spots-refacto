@@ -42,7 +42,7 @@ type Mutation {
   getNewTokens: NewTokensResponse!
   insertSpot(insertSpotInput: SpotInput!): SpotEntity!
   insertTag(tagInsertInput: TagInsertInput!): TagEntity!
-  logout(id: String!): LogoutResponse!
+  logout: LogoutResponse!
   signIn(signInInput: SignInInput!): SignResponse!
   signUp(signUpInput: SignUpInput!): SignResponse!
   toggleFavorite(favoriteInput: FavoriteInput!): ToggleFavoriteResponse!

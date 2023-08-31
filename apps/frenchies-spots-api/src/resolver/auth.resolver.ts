@@ -35,10 +35,10 @@ export class AuthResolver {
     return this.authBusiness.signin(signInInput);
   }
 
-  @Public()
+  @UseGuards(RefreshTokenGuard)
   @Mutation(() => LogoutResponse)
-  logout(@Args('id', { type: () => String }) id: string) {
-    return this.authBusiness.logout(id);
+  logout(@CurrentUserId() userId: string) {
+    return this.authBusiness.logout(userId);
   }
 
   @Public()
