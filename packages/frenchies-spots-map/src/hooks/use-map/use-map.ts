@@ -13,7 +13,7 @@ const franceViewPort = {
 export const useMap = (defaultViewport = franceViewPort) => {
   const [localePlace, setLocalePlace] = useState({});
   const [viewport, setViewport] = useState<TViewport>(defaultViewport);
-  const [coordinate, setCoordinate] = useState<TCoordinate | undefined>(
+  const [coordinates, setCoordinates] = useState<TCoordinate | undefined>(
     undefined
   );
 
@@ -21,7 +21,7 @@ export const useMap = (defaultViewport = franceViewPort) => {
     localePlace,
     viewport,
     onViewportChange: setViewport,
-    coordinate,
-    onCoordinateClick: setCoordinate,
+    coordinates,
+    onCoordinateClick: setCoordinates,
   };
 };

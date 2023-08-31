@@ -19,7 +19,7 @@ export const useRegion = () => {
 
   const getCodeRegionByCoordinate = async (lat: number, lng: number) => {
     return GOUV_API.get(`/communes?lat=${lat}&lon=${lng}`).then(
-      (communes) => +communes.data[0].codeRegion
+      (communes) => communes.data[0].codeRegion
     );
   };
 
@@ -30,6 +30,6 @@ export const useRegion = () => {
   return {
     regions,
     getAllRegion,
-    getCodeRegionByCoordinate
+    getCodeRegionByCoordinate,
   };
 };

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import { debounce, cloneDeep } from "lodash";
 import { Autocomplete } from "@frenchies-spots/material";
@@ -18,6 +18,10 @@ export const AutocompleteAddress = ({
 }: AutocompleteAddressProps) => {
   const [addresses, setAddresses] = useState<TLocation[]>([]);
   const [value, setValue] = useState(initValue);
+
+  useEffect(() => {
+    setValue(initValue);
+  }, [initValue]);
 
   const { getSearchAddress } = useGeocoding();
 

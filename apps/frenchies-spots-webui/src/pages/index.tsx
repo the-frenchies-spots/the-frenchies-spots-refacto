@@ -1,10 +1,6 @@
 import React from "react";
 import Head from "next/head";
-import {
-  AutocompleteAddress,
-  SelectRegion,
-  LocationPicker,
-} from "@frenchies-spots/map";
+import { LocationManager } from "@frenchies-spots/map";
 import { Box } from "@frenchies-spots/material";
 
 export default function Home() {
@@ -17,11 +13,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>FRENCHIES SPOTS</main>
-      <AutocompleteAddress />
-      <SelectRegion />
-      <Box h={300}>
-        <LocationPicker />
-      </Box>
+      <LocationManager />
     </>
   );
 }

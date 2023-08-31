@@ -1,65 +1,68 @@
 import React, { useEffect, useState } from "react";
 
-import { useGeocoding } from "../../../hooks/use-geocoding/use-geocoding";
+import {
+  TLocation,
+  useGeocoding,
+} from "../../../hooks/use-geocoding/use-geocoding";
 import { useMap } from "../../../hooks";
-import { TCoordinate } from "../../../types";
 import { Map } from "../../Map/Map";
 import { MapMarker } from "../../Marker";
 import { Box, Group, Text } from "@frenchies-spots/material";
 import { useStyles } from "./LocarionPicker.styles";
 
-type TMapLocation = { coordinate: TCoordinate; address: string };
-
 interface LocationPickerProps {
-  onChange?: (value: TMapLocation) => void;
-  value?: TMapLocation | undefined;
+  onChange?: (value: TLocation) => void;
+  value?: TLocation | undefined;
 }
 
 export const LocationPicker = (props: LocationPickerProps) => {
   const { value, onChange } = props;
-  const [locationValue, setLocationValue] = useState<TMapLocation | undefined>(
+  const [locationValue, setLocationValue] = useState<TLocation | undefined>(
     value
   );
 
   const { classes } = useStyles();
   const { searchPlace } = useGeocoding();
-  const { viewport, coordinate, onViewportChange, onCoordinateClick } =
+  const { viewport, coordinates, onViewportChange, onCoordinateClick } =
     useMap();
 
   useEffect(() => {
-    if (typeof coordinate !== "undefined") {
-      const { lat, lng } = coordinate;
+    setLocationValue(value);
+  }, [value]);
+
+  useEffect(() => {
+    if (typeof coordinates !== "undefined") {
+      const { lat, lng } = coordinates;
       searchPlace(`${lng},${lat}`).then((address) => {
-        const res = { coordinate, address: address.placeName };
+        const res = { coordinates, value: address.placeName };
         setLocationValue(res);
         if (typeof onChange === "function") {
           onChange(res);
         }
       });
     }
-  }, [coordinate]);
+  }, [coordinates]);
 
   return (
     <>
-      {" "}
       <Map
         viewport={viewport}
         onViewportChange={onViewportChange}
         onCoordinateClick={onCoordinateClick}
       >
-        {locationValue?.coordinate && (
+        {locationValue?.coordinates && (
           <MapMarker
-            lat={locationValue.coordinate.lat}
-            lng={locationValue.coordinate.lng}
+            lat={locationValue.coordinates.lat}
+            lng={locationValue.coordinates.lng}
           />
         )}
       </Map>
-      <Group>
+      {/* <Group>
         <Text>Lat: </Text>
-        <Text>{locationValue?.coordinate.lat || 0}</Text>
+        <Text>{locationValue?.coordinates.lat || 0}</Text>
         <Text> Lng: </Text>
-        <Text>{locationValue?.coordinate.lng || 0}</Text>
-      </Group>
+        <Text>{locationValue?.coordinates.lng || 0}</Text>
+      </Group> */}
     </>
   );
 };
