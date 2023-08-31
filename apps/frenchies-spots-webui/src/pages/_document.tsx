@@ -1,5 +1,4 @@
 import { Html, Head, Main, NextScript } from "next/document";
-import { AppProvider } from "../../provider";
 
 export default function Document() {
   return (
