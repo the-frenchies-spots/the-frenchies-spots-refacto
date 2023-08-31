@@ -1,13 +1,31 @@
 import React from "react";
 
 import { useRouter } from "next/router";
-import { Box } from "@frenchies-spots/material";
+import { Box, Log } from "@frenchies-spots/material";
+import { useQuery } from "@apollo/client";
+import {
+  QuerySpotByPkArgs,
+  SpotEntity,
+  SpotsInput,
+  queries,
+} from "@frenchies-spots/gql";
 
 const SpotDetailPage = () => {
   const router = useRouter();
   const { spotId } = router.query;
 
-  return <Box>{spotId}</Box>;
+  const { data } = useQuery<{ spotByPk: SpotEntity }, QuerySpotByPkArgs>(
+    queries.spotByPk,
+    {
+      variables: { id: `${spotId}` },
+    }
+  );
+
+  return (
+    <Box>
+      <Log value={data} />
+    </Box>
+  );
 };
 
 export default SpotDetailPage;

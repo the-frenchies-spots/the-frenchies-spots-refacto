@@ -13,6 +13,7 @@ interface GuardProps {
 
 export const Guard = ({ children, excludedRoutes }: GuardProps) => {
   const { authenticated, refresh } = useAuth();
+
   const router = useRouter();
 
   useEffect(() => {
@@ -24,11 +25,11 @@ export const Guard = ({ children, excludedRoutes }: GuardProps) => {
     }
   }, [authenticated]);
 
-  useEffect(() => {
-    if (!authenticated && excludedRoutes?.includes(router.pathname)) {
-      router.push("/sign-in");
-    }
-  }, [authenticated, router, excludedRoutes]);
+  // useEffect(() => {
+  //   if (!authenticated && excludedRoutes?.includes(router.pathname)) {
+  //     router.push("/sign-in");
+  //   }
+  // }, [authenticated, router, excludedRoutes]);
 
   return <>{children}</>;
 };

@@ -9,9 +9,11 @@ export default function App({ Component, pageProps }: AppProps) {
   const ComponentT: any = Component;
   return (
     <AppProvider>
-      <LogoutButton />
       <Guard excludedRoutes={["/spots/favorit"]}>
-        <ComponentT {...pageProps} />
+        <>
+          <LogoutButton />
+          <ComponentT {...pageProps} />
+        </>
       </Guard>
     </AppProvider>
   );

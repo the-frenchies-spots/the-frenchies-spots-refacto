@@ -21,4 +21,4 @@ export class Spot extends Document {
 }
 
 export const SpotSchema = SchemaFactory.createForClass(Spot);
-// SpotSchema.index({ location: '2dsphere' });
+SpotSchema.index({ location: '2dsphere' });

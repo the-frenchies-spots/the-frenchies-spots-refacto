@@ -1,10 +1,21 @@
-import React from "react";
-import { Box, Button } from "@frenchies-spots/material";
+import React, { useState } from "react";
 
-import { queries, SpotEntity, SpotsInput } from "@frenchies-spots/gql";
+import { useRouter } from "next/router";
 import { useQuery } from "@apollo/client";
+import { Box, Button, Log } from "@frenchies-spots/material";
+import { queries, SpotEntity, SpotsInput } from "@frenchies-spots/gql";
+import { useGeoloc } from "@frenchies-spots/map";
+
+import SpotsUi from "@/components/SpotsUi/SpotsUi";
+import { SPOTS_DISPLAY_MODE } from "@/enum/spots-display-mode.enum";
 
 const SpotsPage = () => {
+  const [displayMode, setDisplayMode] = useState<SPOTS_DISPLAY_MODE>(
+    SPOTS_DISPLAY_MODE.MAP_MODE
+  );
+  const router = useRouter();
+  const { userPosition } = useGeoloc();
+
   const { data } = useQuery<
     { spots: SpotEntity[] },
     { spotsInput: SpotsInput }
@@ -12,17 +23,17 @@ const SpotsPage = () => {
     variables: { spotsInput: { searchValue: "" } },
   });
 
+  const handleDetailClick = (id: string) => {
+    router.push(`/spots/${id}`);
+  };
+
   return (
-    <Box>
-      <Button>Spot</Button>
-      {data?.spots?.map((spot) => {
-        return (
-          <pre key={spot.id}>
-            <code>{JSON.stringify(spot, null, 1)}</code>
-            <hr />
-          </pre>
-        );
-      })}
+    <Box w="100%" h="100vh">
+      <SpotsUi
+        mode={displayMode}
+        userPosition={userPosition}
+        spotList={data?.spots}
+      />
     </Box>
   );
 };
