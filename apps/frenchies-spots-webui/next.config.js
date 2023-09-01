@@ -9,9 +9,6 @@ const nextConfig = {
     register: true,
     skipWaitin: true,
   }),
-  experimental: {
-    appDir: true,
-  },
   transpilePackages: [
     "@frenchies-spots/material",
     "@frenchies-spots/gql",
