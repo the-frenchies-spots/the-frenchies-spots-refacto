@@ -1,44 +1,28 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local", ".env"],
-  "globalEnv": [
-    "NEXT_API_URL",
-    "DATABASE_URL",
-    "SHADOW_DATABASE_URL",
-    "SECRET_KEY",
-    "STRIPE_PUBLIC_KEY",
-    "NEXT_PUBLIC_TOKEN_STORAGE_KEY",
-    "ACCESS_TOKEN_SECRET",
-    "REFRESH_TOKEN_SECRET",
-    "NEXT_API_PROD_URL",
-    "NEXT_PUBLIC_API_URL",
-    "NEXT_PUBLIC_MAPBOX_STYLE",
-    "NEXT_PUBLIC_MAPBOX_API_KEY",
-    "NEXT_PUBLIC_MAPBOX_API_URL"
-  ],
+  "globalDotEnv": [".env"],
+  "globalEnv": [".env"],
   "pipeline": {
     "build": {
-      "outputs": ["dist/**", ".next/**"],
+      "outputs": [
+        "dist/**",
+        ".next/**",
+        "build/**",
+        "api/**",
+        "public/build/**"
+      ],
       "dependsOn": ["^build"]
     },
     "dev": {
       "cache": false,
       "persistent": true,
-      "env": [
-        "NEXT_API_URL",
-        "DATABASE_URL",
-        "SHADOW_DATABASE_URL",
-        "SECRET_KEY",
-        "STRIPE_PUBLIC_KEY",
-        "NEXT_PUBLIC_TOKEN_STORAGE_KEY",
-        "ACCESS_TOKEN_SECRET",
-        "REFRESH_TOKEN_SECRET",
-        "NEXT_API_PROD_URL",
-        "NEXT_PUBLIC_API_URL",
-        "NEXT_PUBLIC_MAPBOX_STYLE",
-        "NEXT_PUBLIC_MAPBOX_API_KEY",
-        "NEXT_PUBLIC_MAPBOX_API_URL"
-      ]
+      "env": [".env"]
+    },
+    "start": {
+      "cache": false,
+      "persistent": true,
+      "env": [".env"]
     },
     "lint": {},
     "clean": {

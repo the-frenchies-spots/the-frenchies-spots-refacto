@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import { LocationManager } from "@frenchies-spots/map";
+import { MultipleImagePicker } from "@frenchies-spots/material";
 import { Box } from "@frenchies-spots/material";
 
 export default function Home() {
@@ -14,6 +15,7 @@ export default function Home() {
       </Head>
       <main>FRENCHIES SPOTS</main>
       <LocationManager />
+      <MultipleImagePicker />
     </>
   );
 }
