@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-
+import React, { useCallback, useEffect, useState } from "react";
 import { SelectTagItem, type TTagItem } from "./select-tag-item";
 import { useStyles } from "./SelectTag.styles";
 import { Group, Box } from "@frenchies-spots/material";
@@ -22,31 +21,34 @@ export const SelectTag = (props: SelectTagProps) => {
   } = props;
 
   const { classes } = useStyles();
+
   const [tags, setTags] = useState<string[]>(value);
 
-  const handleChange = (tagId: string) => {
-    if (!disabled)
-      setTags((current) => {
-        let tagList = [...current];
+  // useEffect(() => {
+  //   if (!disabled) setTags(value);
+  // }, [value, disabled]);
+
+  const handleChange = useCallback(
+    (tagId: string) => {
+      if (!disabled) {
+        const tagList = [...tags];
         const currTagIdx = tagList.indexOf(tagId);
-        if (currTagIdx != -1) {
+        if (currTagIdx !== -1) {
           tagList.splice(currTagIdx, 1);
         } else {
           tagList.push(tagId);
         }
         if (typeof onChange === "function") {
-          onChange([...tagList]);
+          onChange(tagList);
         }
-        return [...tagList];
-      });
-  };
-
-  useEffect(() => {
-    if (!disabled) setTags(value);
-  }, [value]);
+        setTags(tagList);
+      }
+    },
+    [tags, disabled, onChange]
+  );
 
   return (
-    <Group p="md">
+    <Group position="center">
       {list.map((selectTagItem, index) => {
         const { id, name, tagPictureUrl, category } = selectTagItem;
         return (

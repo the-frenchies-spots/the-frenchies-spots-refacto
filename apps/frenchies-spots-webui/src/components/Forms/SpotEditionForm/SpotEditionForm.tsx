@@ -1,3 +1,5 @@
+import React, { FormEventHandler } from "react";
+
 import {
   Checkbox,
   MultipleImagePicker,
@@ -9,25 +11,31 @@ import {
   TextInput,
 } from "@frenchies-spots/material";
 import { useForm } from "@frenchies-spots/hooks";
-import React from "react";
 import { SwiperFrame } from "../../SwiperFrame/SwiperFrame";
 import { LocationManager } from "@frenchies-spots/map";
 import { tagsDataList } from "@frenchies-spots/utils";
-import { CategoriesSpotAndTag } from "@frenchies-spots/gql";
+import { CategoriesSpotAndTag, SpotInput } from "@frenchies-spots/gql";
 import { SelectTag } from "../../InputCustom";
 
-export const SpotEditionForm = () => {
-  const form = useForm({ initialValues: {} });
+interface SpotEditionFormProps {
+  initialValues: SpotInput;
+  onSubmit: (values: SpotInput) => void;
+}
+
+export const SpotEditionForm = (props: SpotEditionFormProps) => {
+  const { initialValues, onSubmit } = props;
+
+  const form = useForm<SpotInput>({
+    initialValues,
+  });
+
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+    onSubmit(form.values);
+  };
+
   return (
-    <SwiperForm>
-      {/* SPOT TAG */}
-      <SwiperSlide>
-        <SwiperFrame>
-          <Stack>
-            <SelectTag list={tagsDataList} value={[]} />{" "}
-          </Stack>
-        </SwiperFrame>
-      </SwiperSlide>
+    <SwiperForm onSubmit={handleSubmit}>
       {/* SPOT CATEGORY */}
       <SwiperSlide>
         <SwiperFrame>
@@ -44,6 +52,20 @@ export const SpotEditionForm = () => {
                   value: CategoriesSpotAndTag.SPARE_TIME_SPOT,
                 },
               ]}
+              {...form.getInputProps("category")}
+            />
+          </Stack>
+        </SwiperFrame>
+      </SwiperSlide>
+      {/* SPOT TAG */}
+      <SwiperSlide>
+        <SwiperFrame>
+          <Stack>
+            <SelectTag
+              list={tagsDataList.filter(
+                (tag) => tag.category === form.values.category
+              )}
+              {...form.getInputProps("tags")}
             />
           </Stack>
         </SwiperFrame>

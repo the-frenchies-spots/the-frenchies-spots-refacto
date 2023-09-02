@@ -12,6 +12,7 @@ export const useStyles = createStyles((theme, selected: boolean) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    cursor: "pointer",
   },
   picture: {},
   label: {},
