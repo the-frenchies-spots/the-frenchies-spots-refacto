@@ -6,13 +6,16 @@ import { SwiperFormLayout } from "../SwiperForm/SwiperFormLayout/SwiperFormLayou
 
 interface SwiperFrameProps {
   children: ReactNode;
+  disabled?: boolean;
 }
 
 export const SwiperFrame = (props: SwiperFrameProps) => {
-  const { children } = props;
+  const { children, disabled = false } = props;
   return (
     <SwiperFormLayout
-      navigation={(swiper) => <SwiperNavigation swiper={swiper} />}
+      navigation={(swiper) => (
+        <SwiperNavigation disabled={disabled} swiper={swiper} />
+      )}
     >
       {children}
     </SwiperFormLayout>

@@ -29,6 +29,11 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
 
   const form = useForm<SpotInput>({
     initialValues,
+    validate: {
+      tags: (value: SpotInput["tags"]) => value?.length === 0,
+      name: (value: SpotInput["name"]) => value?.length === 0,
+      description: (value: SpotInput["description"]) => value?.length === 0,
+    },
   });
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
@@ -76,7 +81,7 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
         </SwiperSlide>
         {/* SPOT TAG */}
         <SwiperSlide>
-          <SwiperFrame>
+          <SwiperFrame disabled={!form.isValid("tags")}>
             <Stack>
               <SelectTag
                 list={tagsDataList.filter(
@@ -89,18 +94,26 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
         </SwiperSlide>
         {/* SPOT DESCRIPTION */}
         <SwiperSlide>
-          <SwiperFrame>
+          <SwiperFrame
+            disabled={!(form.isValid("name") && form.isValid("description"))}
+          >
             <Stack>
               <Text>Dis nous en plus sur ton spot !</Text>
               <TextInput
                 label="Nom du spot"
                 placeholder=""
                 {...form.getInputProps("name")}
+                error={form.errors.name && "Vous devez renseigner un nom"}
+                required
               />
               <TextInput
                 label="Description"
                 placeholder=""
                 {...form.getInputProps("description")}
+                error={
+                  form.errors.name && "Vous devez renseigner une description"
+                }
+                required
               />
               <Checkbox
                 label="Est-ce que je peux me garer ?"
