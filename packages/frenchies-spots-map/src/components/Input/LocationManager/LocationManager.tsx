@@ -9,7 +9,7 @@ import { useRegion } from "../../../hooks";
 
 import { useStyles } from "./LocationManager.styles";
 
-type TLocationData = { location: TLocation; codeRegion: string };
+export type TLocationData = { location: TLocation; codeRegion: string };
 
 interface LocationManagerProps {
   value?: TLocationData;

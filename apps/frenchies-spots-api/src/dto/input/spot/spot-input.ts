@@ -52,6 +52,6 @@ export class SpotInput {
   @Field(() => [SpotPictureInput], { nullable: true })
   pictures?: SpotPictureInput[];
 
-  @Field(() => [TagInput], { nullable: true })
-  tags?: TagInput[] | null;
+  @Field(() => [String], { nullable: true })
+  tags?: string[] | null;
 }

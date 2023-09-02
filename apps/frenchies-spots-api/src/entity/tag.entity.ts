@@ -18,7 +18,7 @@ export class TagEntity implements Tag {
   id: string;
 
   @Field()
-  @Column({ unique: true })
+  @Column()
   name: string;
 
   @Field()
@@ -26,7 +26,7 @@ export class TagEntity implements Tag {
   tagPictureUrl: string;
 
   @Field()
-  @Column()
+  @Column({ type: 'enum', enum: CategoriesSpotAndTag })
   category: CategoriesSpotAndTag;
 
   @Field(() => [SpotEntity], { nullable: true })

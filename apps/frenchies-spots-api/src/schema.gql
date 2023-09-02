@@ -135,7 +135,7 @@ type SpotEntity {
   ratings: [RatingEntity!]
   region: String!
   spotPicture: [SpotPictureEntity!]
-  tags: [TagEntity!]
+  tags: [TagOnSpotEntity!]
   updatedAt: DateTime!
 }
 
@@ -150,7 +150,7 @@ input SpotInput {
   name: String!
   pictures: [SpotPictureInput!]
   region: String!
-  tags: [TagInput!]
+  tags: [String!]
 }
 
 type SpotPictureEntity {
@@ -194,10 +194,6 @@ type TagEntity {
   updatedAt: DateTime!
 }
 
-input TagInput {
-  id: String!
-}
-
 input TagInsertInput {
   category: String
   name: String
@@ -208,6 +204,15 @@ input TagListInput {
   category: String
   ids: [String!]
   searchValue: String
+}
+
+type TagOnSpotEntity {
+  createdAt: DateTime!
+  id: String!
+  spotId: String!
+  tag: TagEntity!
+  tagId: String!
+  updatedAt: DateTime!
 }
 
 input TagUpdateInput {

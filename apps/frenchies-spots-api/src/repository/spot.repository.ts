@@ -118,14 +118,19 @@ export class SpotRepository {
     profileId: string,
   ): Promise<SpotEntity> {
     const { tags, ...values } = insertSpotInput;
+
+    console.log('============================');
+    console.log({ tags });
+    console.log('============================');
     const spot = await this.prisma.spot.create({
       data: {
         ...values,
         tags: {
-          create: tags.map((tag) => {
+          create: tags.map((tagId) => {
+            console.log({ tagId });
             return {
               tag: {
-                connect: { id: tag.id },
+                connect: { id: tagId },
               },
             };
           }),
@@ -157,10 +162,10 @@ export class SpotRepository {
         ...values,
         tags: {
           deleteMany: {},
-          create: tags?.map((tag) => {
+          create: tags?.map((tagId) => {
             return {
               tag: {
-                connect: { id: tag.id },
+                connect: { id: tagId },
               },
             };
           }),

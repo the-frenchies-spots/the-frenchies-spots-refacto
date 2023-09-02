@@ -3,11 +3,13 @@ import { IconCameraFilled, IconCamera, IconX } from "@frenchies-spots/icon";
 import { useStyles } from "./ImagePicker.styles";
 import { Box, Image, Text } from "@mantine/core";
 
+export type PictureValue = { url: string; hostId?: string };
+
 interface ImagePickerProps {
   index?: number;
-  value?: string | null;
+  value?: PictureValue | null;
   style?: Record<string, string | number>;
-  onImageChange?: (base64: string) => void;
+  onImageChange?: (pictureValue: PictureValue) => void;
   onImageDelete?: (index: number) => void;
   disablePreview?: boolean;
   isCardMode?: boolean;
@@ -23,7 +25,9 @@ export const ImagePicker = (props: ImagePickerProps) => {
     isCardMode = false,
   } = props;
 
-  const [selectedImage, setSelectedImage] = useState<string | null>(value);
+  const [selectedImage, setSelectedImage] = useState<PictureValue | null>(
+    value
+  );
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -34,14 +38,24 @@ export const ImagePicker = (props: ImagePickerProps) => {
   };
   const { classes } = useStyles(isCardMode);
 
-  const handleImageChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+  const handleImageChange: React.ChangeEventHandler<HTMLInputElement> = async (
+    e
+  ) => {
     if (e?.target?.files) {
       const file = e.target.files[0];
+
       if (file) {
-        const base64 = URL.createObjectURL(file);
-        setSelectedImage(base64);
+        const blob = await file.arrayBuffer();
+        const base64 = `data:${file.type};base64,${btoa(
+          new Uint8Array(blob).reduce(
+            (data, byte) => data + String.fromCharCode(byte),
+            ""
+          )
+        )}`;
+
+        setSelectedImage({ url: base64 });
         if (typeof onImageChange === "function") {
-          onImageChange(base64);
+          onImageChange({ url: base64 });
         }
       }
     }
@@ -60,7 +74,7 @@ export const ImagePicker = (props: ImagePickerProps) => {
     <Box>
       <Box onClick={handleImageClick} className={classes.container}>
         {!disablePreview && selectedImage ? (
-          <Image className={classes.image} src={selectedImage} />
+          <Image className={classes.image} src={selectedImage.url} />
         ) : (
           <IconCameraFilled size={40} style={{ color: "#8F8FD9" }} />
         )}

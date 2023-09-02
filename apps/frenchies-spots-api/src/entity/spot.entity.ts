@@ -15,6 +15,7 @@ import { RatingEntity } from './rating.entity';
 import { ProfileEntity } from './profile.entity';
 import { FavoriteEntity } from './favorite.entity';
 import { SpotPictureEntity } from './spot-picture.entity';
+import { TagOnSpotEntity } from './tag-on-spot.entity';
 
 @ObjectType()
 export class Location {
@@ -92,9 +93,9 @@ export class SpotEntity implements Spot {
   })
   favorites?: FavoriteEntity[] | null;
 
-  @Field(() => [TagEntity], { nullable: true })
-  @ManyToMany(() => TagEntity, (tag) => tag.spots)
-  tags?: TagEntity[] | null;
+  @Field(() => [TagOnSpotEntity], { nullable: true })
+  @ManyToMany(() => TagOnSpotEntity, (tagEl) => tagEl.tag.spots)
+  tags?: TagOnSpotEntity[] | null;
 
   @Field()
   @Column({ default: () => 'CURRENT_TIMESTAMP' })
