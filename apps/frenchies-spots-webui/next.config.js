@@ -13,6 +13,7 @@ const nextConfig = {
     "@frenchies-spots/material",
     "@frenchies-spots/gql",
     "@frenchies-spots/hooks",
+    "@frenchies-spots/utils",
   ],
   images: {
     domains: ["res.cloudinary.com"],

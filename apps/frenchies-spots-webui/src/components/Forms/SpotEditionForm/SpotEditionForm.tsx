@@ -5,8 +5,6 @@ import {
   MultipleImagePicker,
   SegmentedControl,
   Stack,
-  SwiperForm,
-  SwiperSlide,
   Text,
   TextInput,
 } from "@frenchies-spots/material";
@@ -16,6 +14,8 @@ import { LocationManager } from "@frenchies-spots/map";
 import { tagsDataList } from "@frenchies-spots/utils";
 import { CategoriesSpotAndTag, SpotInput } from "@frenchies-spots/gql";
 import { SelectTag } from "../../InputCustom";
+import { SwiperForm } from "@/components/SwiperForm/SwiperForm";
+import { SwiperSlide } from "swiper/react";
 
 interface SpotEditionFormProps {
   initialValues: SpotInput;

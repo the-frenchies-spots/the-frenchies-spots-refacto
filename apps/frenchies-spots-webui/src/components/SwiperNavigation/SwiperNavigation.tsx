@@ -1,9 +1,10 @@
 import React from "react";
 
-import { Group, Button, SwiperType } from "@frenchies-spots/material";
+import { Group, Button } from "@frenchies-spots/material";
+import type { Swiper } from "swiper/types";
 
 interface SwiperNavigationProps {
-  swiper: SwiperType;
+  swiper: Swiper;
 }
 
 const SwiperNavigation = (props: SwiperNavigationProps) => {

@@ -2,7 +2,8 @@ import React from "react";
 import { SpotEditionForm } from "../../../components";
 
 const SpotUpdatePage = () => {
-  return <SpotEditionForm />;
+  // return <SpotEditionForm />;
+  return <></>;
 };
 
 export default SpotUpdatePage;

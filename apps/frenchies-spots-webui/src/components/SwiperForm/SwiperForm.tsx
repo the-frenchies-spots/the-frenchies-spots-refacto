@@ -1,0 +1,33 @@
+import React, { FormEventHandler, ReactNode } from "react";
+
+import { Swiper } from "swiper/react";
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
+
+// Import Swiper styles
+import "swiper/css";
+
+import { Button } from "@frenchies-spots/material";
+
+interface SwiperFormProps {
+  children: ReactNode;
+  onSubmit: FormEventHandler<HTMLFormElement>;
+}
+
+export const SwiperForm = ({ children, onSubmit }: SwiperFormProps) => {
+  return (
+    <form onSubmit={onSubmit}>
+      <Swiper
+        modules={[Navigation, Pagination, Scrollbar, A11y]}
+        spaceBetween={0}
+        slidesPerView={1}
+        navigation
+        pagination={{ clickable: true }}
+        scrollbar={{ draggable: true }}
+        style={{ border: "1px solid", height: "80vh" }}
+      >
+        {children}
+      </Swiper>
+      <Button type="submit">Submit</Button>
+    </form>
+  );
+};

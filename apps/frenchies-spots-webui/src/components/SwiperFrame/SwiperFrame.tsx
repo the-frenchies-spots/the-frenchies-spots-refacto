@@ -1,7 +1,8 @@
 import React, { ReactNode } from "react";
 
-import { Box, SwiperFormLayout } from "@frenchies-spots/material";
 import SwiperNavigation from "../SwiperNavigation/SwiperNavigation";
+
+import { SwiperFormLayout } from "../SwiperForm/SwiperFormLayout/SwiperFormLayout";
 
 interface SwiperFrameProps {
   children: ReactNode;
