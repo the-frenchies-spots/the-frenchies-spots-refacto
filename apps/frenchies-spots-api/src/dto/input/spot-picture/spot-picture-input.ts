@@ -8,6 +8,8 @@ import { Column, ManyToMany, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 @InputType()
 export class SpotPictureInput {
   @Field()
-  @Column()
   url: string;
+
+  @Field({ nullable: true })
+  hostId?: string;
 }

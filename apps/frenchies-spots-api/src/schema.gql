@@ -128,8 +128,6 @@ type SpotEntity {
   id: String!
   isCanPark: Boolean!
   isHidden: Boolean!
-  lat: Float!
-  lng: Float!
   location: JSON
   name: String!
   profile: ProfileEntity!
@@ -143,23 +141,21 @@ type SpotEntity {
 
 input SpotInput {
   address: String!
-  averageRating: Float!
   category: String!
   description: String!
   id: String
   isCanPark: Boolean!
   isHidden: Boolean!
-  lat: Float!
-  lng: Float!
   location: JSON
   name: String!
+  pictures: [SpotPictureInput!]
   region: String!
-  spotPicture: [SpotPictureInput!]
   tags: [TagInput!]
 }
 
 type SpotPictureEntity {
   createdAt: DateTime!
+  hostId: String!
   id: String!
   spot: SpotEntity!
   spotId: String!
@@ -168,6 +164,7 @@ type SpotPictureEntity {
 }
 
 input SpotPictureInput {
+  hostId: String
   url: String!
 }
 

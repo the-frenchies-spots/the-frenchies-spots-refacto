@@ -9,6 +9,7 @@ import { SpotBusiness } from 'src/business/spot.business';
 import { PrismaService } from 'src/service/prisma.service';
 import { AccessTokenGuard } from 'src/guard/accessToken.guard';
 import { SpotRepository } from 'src/repository/spot.repository';
+import { CloudinaryService } from 'src/service/cloudinary.service';
 import { AccessTokenStrategy } from 'src/strategy/accessToken.strategy';
 import { RefreshTokenStrategy } from 'src/strategy/refreshToken.strategy';
 import { SpotGeospatialService } from 'src/service/spot-geospatial.service';
@@ -22,6 +23,7 @@ import { SpotGeospatialService } from 'src/service/spot-geospatial.service';
     JwtService,
     TokenService,
     PrismaService,
+    CloudinaryService,
     SpotGeospatialService,
     AccessTokenGuard,
     AccessTokenStrategy,

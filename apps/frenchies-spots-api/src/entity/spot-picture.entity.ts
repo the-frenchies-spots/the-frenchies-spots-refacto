@@ -26,6 +26,10 @@ export class SpotPictureEntity implements SpotPicture {
   spotId: string;
 
   @Field()
+  @Column({ unique: true })
+  hostId: string;
+
+  @Field()
   @Column({ default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 

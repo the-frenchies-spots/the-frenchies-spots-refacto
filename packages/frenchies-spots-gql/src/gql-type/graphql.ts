@@ -216,8 +216,6 @@ export type SpotEntity = {
   id: Scalars['String']['output'];
   isCanPark: Scalars['Boolean']['output'];
   isHidden: Scalars['Boolean']['output'];
-  lat: Scalars['Float']['output'];
-  lng: Scalars['Float']['output'];
   location?: Maybe<Scalars['JSON']['output']>;
   name: Scalars['String']['output'];
   profile: ProfileEntity;
@@ -231,24 +229,22 @@ export type SpotEntity = {
 
 export type SpotInput = {
   address: Scalars['String']['input'];
-  averageRating: Scalars['Float']['input'];
   category: Scalars['String']['input'];
   description: Scalars['String']['input'];
   id?: InputMaybe<Scalars['String']['input']>;
   isCanPark: Scalars['Boolean']['input'];
   isHidden: Scalars['Boolean']['input'];
-  lat: Scalars['Float']['input'];
-  lng: Scalars['Float']['input'];
   location?: InputMaybe<Scalars['JSON']['input']>;
   name: Scalars['String']['input'];
+  pictures?: InputMaybe<Array<SpotPictureInput>>;
   region: Scalars['String']['input'];
-  spotPicture?: InputMaybe<Array<SpotPictureInput>>;
   tags?: InputMaybe<Array<TagInput>>;
 };
 
 export type SpotPictureEntity = {
   __typename?: 'SpotPictureEntity';
   createdAt: Scalars['DateTime']['output'];
+  hostId: Scalars['String']['output'];
   id: Scalars['String']['output'];
   spot: SpotEntity;
   spotId: Scalars['String']['output'];
@@ -257,6 +253,7 @@ export type SpotPictureEntity = {
 };
 
 export type SpotPictureInput = {
+  hostId?: InputMaybe<Scalars['String']['input']>;
   url: Scalars['String']['input'];
 };
 

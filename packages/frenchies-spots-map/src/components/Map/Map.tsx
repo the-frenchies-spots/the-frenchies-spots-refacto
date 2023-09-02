@@ -8,10 +8,12 @@ interface MapProps {
   onViewportChange?: (newViewport: TViewport) => void;
   onCoordinateClick?: (coordinate: TCoordinate | undefined) => void;
   children?: ReactNode;
+  style?: React.CSSProperties;
 }
 
 export const Map = (props: MapProps) => {
-  const { children, viewport, onViewportChange, onCoordinateClick } = props;
+  const { children, viewport, style, onViewportChange, onCoordinateClick } =
+    props;
   const [loaded, setLoaded] = useState(false);
 
   const handleViewportChange = (viewState: TViewport) => {
@@ -34,7 +36,7 @@ export const Map = (props: MapProps) => {
       onMove={(evt) => handleViewportChange(evt.viewState)}
       onClick={(evt) => handleCoordinateClick(evt.lngLat)}
       onLoad={() => setLoaded(true)}
-      style={{ width: "100%", height: "100%" }}
+      style={{ width: "100%", height: "100%", ...style }}
     >
       {children}
     </ReactMapGL>

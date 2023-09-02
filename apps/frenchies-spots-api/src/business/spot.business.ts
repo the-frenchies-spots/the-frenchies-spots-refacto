@@ -6,8 +6,10 @@ import { codeErrors } from 'src/enum/code-errors.enum';
 import { SpotInput } from 'src/dto/input/spot/spot-input';
 import { SpotsInput } from 'src/dto/input/spot/spots-input';
 import { SpotRepository } from 'src/repository/spot.repository';
-import { SpotGeospatialService } from 'src/service/spot-geospatial.service';
 import { DeleteResponse } from 'src/dto/response/delete.response';
+import { CloudinaryService } from 'src/service/cloudinary.service';
+import { SpotGeospatialService } from 'src/service/spot-geospatial.service';
+import { SpotPictureEntity } from 'src/entity/spot-picture.entity';
 
 const { SPOT_NOT_FOUND, SPOT_ID_NOT_MATCH_PROFILE_ID } = codeErrors;
 
@@ -16,6 +18,7 @@ export class SpotBusiness {
   constructor(
     private spotRepository: SpotRepository,
     private geoService: SpotGeospatialService,
+    private cloudinaryService: CloudinaryService,
   ) {}
 
   async getById(
@@ -45,7 +48,22 @@ export class SpotBusiness {
     insertSpotInput: SpotInput,
     profileId: string,
   ): Promise<SpotEntity> {
-    return await this.spotRepository.create(insertSpotInput, profileId);
+    const { pictures, ...spotInput } = insertSpotInput;
+
+    let spotPicture: Pick<SpotPictureEntity, 'url' | 'hostId'>[] = [];
+
+    if (pictures?.length) {
+      const uploadPicture = await this.cloudinaryService.uploadImage(
+        pictures.map(({ url }) => url),
+      );
+
+      spotPicture = uploadPicture?.map((uploadResponse) => ({
+        url: uploadResponse.secure_url,
+        hostId: uploadResponse.public_id,
+      }));
+    }
+
+    return await this.spotRepository.create(spotInput, spotPicture, profileId);
   }
 
   async update(
@@ -53,7 +71,29 @@ export class SpotBusiness {
     profileId: string,
   ): Promise<SpotEntity> {
     this.checkUserIsOwner(updateSpotInput.id, profileId);
-    return await this.spotRepository.update(updateSpotInput);
+    const { pictures, ...spotInput } = updateSpotInput;
+
+    let spotPicture: Pick<SpotPictureEntity, 'url' | 'hostId'>[] = [];
+
+    if (pictures?.length) {
+      const oldPictures = pictures.filter(
+        (item) => item.hostId !== undefined,
+      ) as Pick<SpotPictureEntity, 'url' | 'hostId'>[];
+      const newPictures = pictures.filter((item) => item.hostId === undefined);
+
+      const uploadPicture = await this.cloudinaryService.uploadImage(
+        newPictures.map(({ url }) => url),
+      );
+
+      const uploadNewPictures = uploadPicture?.map((uploadResponse) => ({
+        url: uploadResponse.secure_url,
+        hostId: uploadResponse.public_id,
+      }));
+
+      spotPicture = [...uploadNewPictures, ...oldPictures];
+    }
+
+    return await this.spotRepository.update(spotInput, spotPicture);
   }
 
   async checkUserIsOwner(

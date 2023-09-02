@@ -1,11 +1,11 @@
 import { Field, InputType } from '@nestjs/graphql';
-import { CategoriesSpotAndTag } from '@prisma/client';
 
 import { Column } from 'typeorm';
 import { SpotPictureInput } from '../spot-picture/spot-picture-input';
 import { TagInput } from '../tag/tag.input';
 import GraphQLJSON from 'graphql-type-json';
 import { Location } from 'src/entity/spot.entity';
+import { CategoriesSpotAndTag } from 'src/enum/categories-spot-and-tag.enum';
 
 @InputType()
 export class SpotInput {
@@ -30,16 +30,12 @@ export class SpotInput {
   isHidden: boolean;
 
   @Field()
-  @Column({ type: 'enum', enum: CategoriesSpotAndTag })
+  @Column({
+    type: 'enum',
+    enum: CategoriesSpotAndTag,
+    default: CategoriesSpotAndTag.SPARE_TIME_SPOT,
+  })
   category: CategoriesSpotAndTag;
-
-  @Field()
-  @Column('float')
-  lat: number;
-
-  @Field()
-  @Column('float')
-  lng: number;
 
   @Field(() => GraphQLJSON, { nullable: true })
   @Column('json')
@@ -53,12 +49,8 @@ export class SpotInput {
   @Column()
   address: string;
 
-  @Field()
-  @Column({ default: 0 })
-  averageRating: number;
-
   @Field(() => [SpotPictureInput], { nullable: true })
-  spotPicture?: SpotPictureInput[] | null;
+  pictures?: SpotPictureInput[];
 
   @Field(() => [TagInput], { nullable: true })
   tags?: TagInput[] | null;

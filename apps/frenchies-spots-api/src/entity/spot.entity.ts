@@ -60,14 +60,6 @@ export class SpotEntity implements Spot {
   @Column()
   profileId: string;
 
-  @Field()
-  @Column('float')
-  lat: number;
-
-  @Field()
-  @Column('float')
-  lng: number;
-
   @Field(() => GraphQLJSON, { nullable: true })
   @Column('json')
   location: Location;

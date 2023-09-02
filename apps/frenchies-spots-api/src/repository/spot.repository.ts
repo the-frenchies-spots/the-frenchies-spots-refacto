@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
+import { SpotPictureInput } from 'src/dto/input/spot-picture/spot-picture-input';
 import { SpotInput } from 'src/dto/input/spot/spot-input';
 import { SpotsInput } from 'src/dto/input/spot/spots-input';
+import { SpotPictureEntity } from 'src/entity/spot-picture.entity';
 import { SpotEntity } from 'src/entity/spot.entity';
 import { PrismaService } from 'src/service/prisma.service';
 import { plainToClass, plainToClassMany } from 'src/utils/plain-to-class';
@@ -112,9 +114,10 @@ export class SpotRepository {
 
   async create(
     insertSpotInput: SpotInput,
+    spotPicture: Pick<SpotPictureEntity, 'url' | 'hostId'>[],
     profileId: string,
   ): Promise<SpotEntity> {
-    const { spotPicture, tags, ...values } = insertSpotInput;
+    const { tags, ...values } = insertSpotInput;
     const spot = await this.prisma.spot.create({
       data: {
         ...values,
@@ -139,8 +142,11 @@ export class SpotRepository {
     return plainToClass(spot, SpotEntity);
   }
 
-  async update(updateSpotInput: SpotInput): Promise<SpotEntity> {
-    const { id: spotId, spotPicture, tags, ...values } = updateSpotInput;
+  async update(
+    updateSpotInput: SpotInput,
+    spotPicture: Pick<SpotPictureEntity, 'url' | 'hostId'>[],
+  ): Promise<SpotEntity> {
+    const { id: spotId, tags, ...values } = updateSpotInput;
 
     const spot = await this.prisma.spot.update({
       where: {

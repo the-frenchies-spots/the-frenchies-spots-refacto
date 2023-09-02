@@ -74,8 +74,6 @@ model Spot {
   category      CategoriesSpotAndTag
   profile       Profile               @relation(fields: [profileId], references: [id], onDelete: Cascade)
   profileId     String                @unique @db.ObjectId
-  lat           Float
-  lng           Float
   location      Location
   region        String
   address       String
@@ -110,6 +108,7 @@ model Tag {
 
 model SpotPicture {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  hostId    String
   url       String
   spot      Spot     @relation(fields: [spotId], references: [id], onDelete: Cascade)
   spotId    String   @unique @db.ObjectId

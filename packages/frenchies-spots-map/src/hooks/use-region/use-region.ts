@@ -18,9 +18,9 @@ export const useRegion = () => {
   }, []);
 
   const getCodeRegionByCoordinate = async (lat: number, lng: number) => {
-    return GOUV_API.get(`/communes?lat=${lat}&lon=${lng}`).then(
-      (communes) => communes.data[0].codeRegion
-    );
+    return GOUV_API.get(`/communes?lat=${lat}&lon=${lng}`)
+      .then((communes) => communes?.data[0]?.codeRegion)
+      .catch(() => alert("Vous devez rester sur le territoire français !"));
   };
 
   useEffect(() => {

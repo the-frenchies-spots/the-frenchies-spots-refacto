@@ -7,6 +7,8 @@ import { SelectRegion } from "../SelectRegion/SelectRegion";
 import { TLocation } from "../../../hooks/use-geocoding/use-geocoding";
 import { useRegion } from "../../../hooks";
 
+import { useStyles } from "./LocationManager.styles";
+
 type TLocationData = { location: TLocation; codeRegion: string };
 
 interface LocationManagerProps {
@@ -20,6 +22,8 @@ export const LocationManager = ({ value, onChange }: LocationManagerProps) => {
     value
   );
 
+  const { classes } = useStyles();
+
   const handleChange = async (newData: TLocation) => {
     const { lat, lng } = newData.coordinates;
     const codeRegion = await getCodeRegionByCoordinate(lat, lng);
@@ -31,12 +35,12 @@ export const LocationManager = ({ value, onChange }: LocationManagerProps) => {
   };
 
   return (
-    <Stack>
+    <Box className={classes.container}>
       <AutocompleteAddress
         value={locationData?.location?.value}
         onChange={handleChange}
       />
-      <Box h={300}>
+      <Box className={classes.locationPicker}>
         <LocationPicker
           value={locationData?.location}
           onChange={handleChange}
@@ -47,6 +51,6 @@ export const LocationManager = ({ value, onChange }: LocationManagerProps) => {
         placeholder="region"
         readOnly
       />
-    </Stack>
+    </Box>
   );
 };
