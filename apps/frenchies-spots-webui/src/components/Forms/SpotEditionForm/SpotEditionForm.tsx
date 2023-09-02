@@ -12,12 +12,22 @@ import { useForm } from "@frenchies-spots/hooks";
 import React from "react";
 import { SwiperFrame } from "../../SwiperFrame/SwiperFrame";
 import { LocationManager } from "@frenchies-spots/map";
+import { tagsDataList } from "@frenchies-spots/utils";
 import { CategoriesSpotAndTag } from "@frenchies-spots/gql";
+import { SelectTag } from "../../InputCustom";
 
 export const SpotEditionForm = () => {
   const form = useForm({ initialValues: {} });
   return (
     <SwiperForm>
+      {/* SPOT TAG */}
+      <SwiperSlide>
+        <SwiperFrame>
+          <Stack>
+            <SelectTag list={tagsDataList} value={[]} />{" "}
+          </Stack>
+        </SwiperFrame>
+      </SwiperSlide>
       {/* SPOT CATEGORY */}
       <SwiperSlide>
         <SwiperFrame>
