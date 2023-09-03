@@ -20,7 +20,6 @@ export const insertSpot = gql`
         url
       }
       tags {
-        id
         tag {
           category
           id

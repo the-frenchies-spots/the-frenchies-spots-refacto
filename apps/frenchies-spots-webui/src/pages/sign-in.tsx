@@ -10,6 +10,7 @@ import {
 } from "@frenchies-spots/material";
 import { SignInInput } from "@frenchies-spots/gql";
 import { useAuth } from "@/hooks";
+import { PageLayout } from "../components";
 
 const SignIn = () => {
   const { user, onSignIn } = useAuth();
@@ -64,3 +65,7 @@ const SignIn = () => {
 };
 
 export default SignIn;
+
+SignIn.getLayout = function getLayout(page) {
+  return <PageLayout>{page}</PageLayout>;
+};

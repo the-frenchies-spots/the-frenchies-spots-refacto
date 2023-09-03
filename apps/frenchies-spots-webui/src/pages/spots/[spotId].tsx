@@ -9,6 +9,7 @@ import {
   SpotsInput,
   queries,
 } from "@frenchies-spots/gql";
+import { PageLayout } from "../../components/Layout/PageLayout/PageLayout";
 
 const SpotDetailPage = () => {
   const router = useRouter();
@@ -29,3 +30,7 @@ const SpotDetailPage = () => {
 };
 
 export default SpotDetailPage;
+
+SpotDetailPage.getLayout = function getLayout(page) {
+  return <PageLayout>{page}</PageLayout>;
+};

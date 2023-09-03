@@ -1,5 +1,5 @@
 import React from "react";
-import { SpotEditionForm } from "../../../components";
+import { PageLayout, SpotEditionForm } from "../../../components";
 import { Container } from "@frenchies-spots/material";
 import {
   CategoriesSpotAndTag,
@@ -9,6 +9,7 @@ import {
   mutations,
 } from "@frenchies-spots/gql";
 import { useMutation } from "@apollo/client";
+import { useRouter } from "next/router";
 
 const initialValues: SpotInput = {
   name: "",
@@ -27,19 +28,16 @@ const initialValues: SpotInput = {
 };
 
 const SpotInsertPage = () => {
+  const router = useRouter();
+
   const [insertSpot, { data, loading, error }] = useMutation<
     { insertSpot: SpotEntity },
     MutationInsertSpotArgs
   >(mutations.insertSpot);
 
   const handleSubmit = (insertSpotInput: SpotInput) => {
-    console.log("-------------------------");
-    console.log({ insertSpotInput });
-    console.log("-------------------------");
     insertSpot({ variables: { insertSpotInput } }).then((result) => {
-      console.log("=======================");
-      console.log(result);
-      console.log("=======================");
+      router.push("/spots");
     });
   };
 
@@ -55,3 +53,7 @@ const SpotInsertPage = () => {
 };
 
 export default SpotInsertPage;
+
+SpotInsertPage.getLayout = function getLayout(page) {
+  return <PageLayout>{page}</PageLayout>;
+};

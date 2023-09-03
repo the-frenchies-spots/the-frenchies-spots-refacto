@@ -6,18 +6,14 @@ export const spots = gql`
       address
       averageRating
       category
-      createdAt
       description
       id
       isCanPark
       isHidden
-      lat
-      lng
       location
       name
       profileId
       region
-      updatedAt
     }
   }
 `;

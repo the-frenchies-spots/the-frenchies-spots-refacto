@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@apollo/server": "^4.7.5",
+    "@frenchies-spots/utils": "workspace:*",
     "@nestjs/apollo": "^12.0.7",
     "@nestjs/common": "^10.0.0",
     "@nestjs/config": "^3.0.0",
@@ -54,8 +55,7 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
     "typeorm": "^0.3.17",
-    "uuid": "^9.0.0",
-    "@frenchies-spots/utils": "workspace:*"
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.0.2",

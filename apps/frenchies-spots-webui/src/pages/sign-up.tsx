@@ -11,6 +11,7 @@ import {
 } from "@frenchies-spots/material";
 import { SignUpInput } from "@frenchies-spots/gql";
 import { useAuth } from "@/hooks";
+import { PageLayout } from "../components";
 
 const SignUp = () => {
   const { user, loading, onSignUp } = useAuth();
@@ -77,3 +78,7 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
+SignUp.getLayout = function getLayout(page) {
+  return <PageLayout>{page}</PageLayout>;
+};

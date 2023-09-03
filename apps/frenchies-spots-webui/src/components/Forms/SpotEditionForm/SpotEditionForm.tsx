@@ -33,6 +33,10 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
       tags: (value: SpotInput["tags"]) => value?.length === 0,
       name: (value: SpotInput["name"]) => value?.length === 0,
       description: (value: SpotInput["description"]) => value?.length === 0,
+      address: (value: SpotInput["address"]) => value?.length === 0,
+      location: (value: SpotInput["location"]) =>
+        value?.coordinates.length <= 1,
+      region: (value: SpotInput["region"]) => value?.length === 0,
     },
   });
 
@@ -60,7 +64,7 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
       <SwiperForm onSubmit={handleSubmit}>
         {/* SPOT CATEGORY */}
         <SwiperSlide>
-          <SwiperFrame>
+          <SwiperFrame prevLabel="">
             <Stack>
               <Text>A quelle catégorie associerais-tu ton spot ?</Text>
               <SegmentedControl
@@ -130,7 +134,15 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
         </SwiperSlide>
         {/* SPOT ADDRESS */}
         <SwiperSlide>
-          <SwiperFrame>
+          <SwiperFrame
+            disabled={
+              !(
+                form.isValid("address") &&
+                form.isValid("location") &&
+                form.isValid("region")
+              )
+            }
+          >
             <LocationManager
               value={{
                 location: {
@@ -146,8 +158,9 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
             />
           </SwiperFrame>
         </SwiperSlide>
+        {/* PUBLIC || PRIVATE */}
         <SwiperSlide>
-          <SwiperFrame>
+          <SwiperFrame nextLabel="Valider">
             <Stack>
               <Text>
                 Dernier effort ! Quel statut préfères-tu pour ton spot ?
@@ -161,10 +174,18 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
                   },
                   {
                     label: "Privée",
-                    value: "protected",
+                    value: "private",
                   },
                 ]}
               />
+            </Stack>
+          </SwiperFrame>
+        </SwiperSlide>
+        {/* PREVIEW */}
+        <SwiperSlide>
+          <SwiperFrame type="submit" nextLabel="Publier">
+            <Stack>
+              <Text>Preview</Text>
             </Stack>
           </SwiperFrame>
         </SwiperSlide>

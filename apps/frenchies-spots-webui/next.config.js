@@ -8,7 +8,9 @@ const nextConfig = {
     dest: "public",
     register: true,
     skipWaitin: true,
+    disable: process.env.NODE_ENV === "development",
   }),
+
   transpilePackages: [
     "@frenchies-spots/material",
     "@frenchies-spots/gql",

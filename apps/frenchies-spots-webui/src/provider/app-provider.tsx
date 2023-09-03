@@ -2,6 +2,7 @@
 import React, { ReactNode } from "react";
 import { GraphqlProvider } from "./graphql-provider";
 import { AuthProvider } from "./auth-provider";
+import { FrSpotsMaterialProvider } from "@frenchies-spots/material";
 
 interface AppProviderProps {
   children: ReactNode;
@@ -10,7 +11,9 @@ interface AppProviderProps {
 export function AppProvider({ children }: AppProviderProps) {
   return (
     <GraphqlProvider>
-      <AuthProvider>{children}</AuthProvider>
+      <AuthProvider>
+        <FrSpotsMaterialProvider>{children}</FrSpotsMaterialProvider>
+      </AuthProvider>
     </GraphqlProvider>
   );
 }

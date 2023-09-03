@@ -223,7 +223,7 @@ export type SpotEntity = {
   ratings?: Maybe<Array<RatingEntity>>;
   region: Scalars['String']['output'];
   spotPicture?: Maybe<Array<SpotPictureEntity>>;
-  tags?: Maybe<Array<TagEntity>>;
+  tags?: Maybe<Array<TagOnSpotEntity>>;
   updatedAt: Scalars['DateTime']['output'];
 };
 
@@ -238,7 +238,7 @@ export type SpotInput = {
   name: Scalars['String']['input'];
   pictures?: InputMaybe<Array<SpotPictureInput>>;
   region: Scalars['String']['input'];
-  tags?: InputMaybe<Array<TagInput>>;
+  tags?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
 export type SpotPictureEntity = {
@@ -284,10 +284,6 @@ export type TagEntity = {
   updatedAt: Scalars['DateTime']['output'];
 };
 
-export type TagInput = {
-  id: Scalars['String']['input'];
-};
-
 export type TagInsertInput = {
   category?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
@@ -298,6 +294,16 @@ export type TagListInput = {
   category?: InputMaybe<Scalars['String']['input']>;
   ids?: InputMaybe<Array<Scalars['String']['input']>>;
   searchValue?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type TagOnSpotEntity = {
+  __typename?: 'TagOnSpotEntity';
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['String']['output'];
+  spotId: Scalars['String']['output'];
+  tag: TagEntity;
+  tagId: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
 };
 
 export type TagUpdateInput = {

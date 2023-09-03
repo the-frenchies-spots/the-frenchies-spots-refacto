@@ -1,5 +1,5 @@
 import React from "react";
-import { SpotEditionForm } from "../../../components";
+import { PageLayout, SpotEditionForm } from "../../../components";
 
 const SpotUpdatePage = () => {
   // return <SpotEditionForm />;
@@ -7,3 +7,7 @@ const SpotUpdatePage = () => {
 };
 
 export default SpotUpdatePage;
+
+SpotUpdatePage.getLayout = function getLayout(page) {
+  return <PageLayout>{page}</PageLayout>;
+};

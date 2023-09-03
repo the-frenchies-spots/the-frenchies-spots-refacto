@@ -29,7 +29,6 @@ export const SwiperForm = ({ children, onSubmit }: SwiperFormProps) => {
       >
         {children}
       </Swiper>
-      <Button type="submit">Submit</Button>
     </form>
   );
 };

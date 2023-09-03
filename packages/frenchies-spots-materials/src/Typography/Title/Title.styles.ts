@@ -1,7 +1,6 @@
 import { createStyles, DEFAULT_THEME as themeO } from "@mantine/core";
 import { TypographyVariants } from "../Typography";
 import { fonts } from "../../utils";
-import { CustomTheme } from "../../FrSpotsMaterialProvider";
 
 export const useStyles = createStyles(
   (theme, variant: keyof typeof TypographyVariants) => {
