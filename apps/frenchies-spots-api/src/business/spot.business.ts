@@ -23,7 +23,7 @@ export class SpotBusiness {
 
   async getById(
     id: string,
-    profileId: string | undefined,
+    profileId?: string | undefined,
   ): Promise<SpotEntity> {
     return this.spotRepository.getById(id, profileId);
   }

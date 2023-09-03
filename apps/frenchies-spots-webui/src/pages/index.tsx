@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import Head from "next/head";
 import { PageLayout } from "../components/Layout/PageLayout/PageLayout";
-import { Typography, Stack, Container } from "@frenchies-spots/material";
+import { HomePage } from "../components";
 
 export default function Home() {
   return (
@@ -19,7 +19,7 @@ export default function Home() {
         />
         <meta name="description" content="Description" />
         <meta name="keywords" content="Keywords" />
-        <title>Next.js PWA Example</title>
+        <title>FRENCHIES-SPOTS</title>
 
         <link rel="manifest" href="/manifest.json" />
       </Head>
@@ -30,18 +30,12 @@ export default function Home() {
           padding: 0,
         }}
       >
-        <Container size="md">
-          <Stack sx={(theme) => ({ color: theme.colors.blue })}>
-            <Typography variant="h1">Entraide</Typography>
-            <Typography variant="h1">Partage</Typography>
-            <Typography variant="h1">Voyage</Typography>
-          </Stack>
-        </Container>
+        <HomePage />
       </main>
     </>
   );
 }
 
 Home.getLayout = function getLayout(page: ReactElement) {
-  return <PageLayout opacity={0.7}>{page}</PageLayout>;
+  return <PageLayout opacity={0}>{page}</PageLayout>;
 };

@@ -17,7 +17,7 @@ export class SpotResolver {
 
   @Public()
   @Query(() => SpotEntity)
-  @UseGuards(AccessTokenGuard)
+  @UseGuards(RefreshTokenGuard)
   spotByPk(
     @Args('id', { type: () => String }) id: string,
     @CurrentProfileId() profileId: string | undefined,
@@ -27,7 +27,7 @@ export class SpotResolver {
 
   @Public()
   @Query(() => [SpotEntity])
-  @UseGuards(AccessTokenGuard)
+  @UseGuards(RefreshTokenGuard)
   spots(
     @Args('spotsInput') spotsInput: SpotsInput,
     @CurrentProfileId() profileId: string | undefined,
@@ -44,7 +44,6 @@ export class SpotResolver {
     return this.spotBusiness.insert(insertSpotInput, profileId);
   }
 
-  @Public()
   @UseGuards(RefreshTokenGuard)
   @Mutation(() => SpotEntity)
   updateSpot(
@@ -54,7 +53,6 @@ export class SpotResolver {
     return this.spotBusiness.update(updateSpotInput, profileId);
   }
 
-  @Public()
   @UseGuards(RefreshTokenGuard)
   @Mutation(() => DeleteResponse)
   deleteSpot(

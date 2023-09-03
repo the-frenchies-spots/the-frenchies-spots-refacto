@@ -31,16 +31,20 @@ export class SpotRepository {
         _count: {
           select: { ratings: true },
         },
-        ratings: {
-          where: {
-            profileId,
-          },
-        },
-        favorites: {
-          where: {
-            profileId,
-          },
-        },
+        ...(profileId
+          ? {
+              ratings: {
+                where: {
+                  profileId,
+                },
+              },
+              favorites: {
+                where: {
+                  profileId,
+                },
+              },
+            }
+          : {}),
       },
     });
 
