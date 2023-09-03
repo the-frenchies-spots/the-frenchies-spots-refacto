@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ReactElement, useState } from "react";
 
 import { useRouter } from "next/router";
 import { useQuery } from "@apollo/client";
@@ -39,7 +39,7 @@ const SpotsPage = () => {
   );
 };
 
-SpotsPage.getLayout = function getLayout(page) {
+SpotsPage.getLayout = function getLayout(page: ReactElement) {
   return <PageLayout>{page}</PageLayout>;
 };
 

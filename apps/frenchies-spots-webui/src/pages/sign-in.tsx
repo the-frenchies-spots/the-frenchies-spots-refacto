@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 
 import { useForm } from "@frenchies-spots/hooks";
 import {
@@ -66,6 +66,6 @@ const SignIn = () => {
 
 export default SignIn;
 
-SignIn.getLayout = function getLayout(page) {
+SignIn.getLayout = function getLayout(page: ReactElement) {
   return <PageLayout>{page}</PageLayout>;
 };

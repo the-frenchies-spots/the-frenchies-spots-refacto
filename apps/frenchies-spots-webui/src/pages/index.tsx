@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import Head from "next/head";
 import { PageLayout } from "../components/Layout/PageLayout/PageLayout";
 import { Typography, Stack, Container } from "@frenchies-spots/material";
@@ -42,6 +42,6 @@ export default function Home() {
   );
 }
 
-Home.getLayout = function getLayout(page) {
+Home.getLayout = function getLayout(page: ReactElement) {
   return <PageLayout opacity={0.7}>{page}</PageLayout>;
 };

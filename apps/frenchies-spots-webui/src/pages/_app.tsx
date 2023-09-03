@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import type { AppProps } from "next/app";
 import type { Page } from "../types/page";
 
@@ -11,12 +11,20 @@ type Props = AppProps & {
 };
 
 export default function App({ Component, pageProps }: Props) {
-  const getLayout = Component.getLayout || ((page) => page);
+  const getLayout = Component?.getLayout || ((page) => page);
+
+  const layout = React.isValidElement(
+    getLayout(<Component {...pageProps} />)
+  ) ? (
+    getLayout(<Component {...pageProps} />)
+  ) : (
+    <>{getLayout(<Component {...pageProps} />)}</>
+  );
 
   return (
     <AppProvider>
       <Guard excludedRoutes={["/spots/favorit"]}>
-        {getLayout(<Component {...pageProps} />)}
+        <>{layout}</>
       </Guard>
     </AppProvider>
   );

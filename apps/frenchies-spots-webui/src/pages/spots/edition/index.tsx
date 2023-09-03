@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { PageLayout, SpotEditionForm } from "../../../components";
 import { Container } from "@frenchies-spots/material";
 import {
@@ -54,6 +54,6 @@ const SpotInsertPage = () => {
 
 export default SpotInsertPage;
 
-SpotInsertPage.getLayout = function getLayout(page) {
+SpotInsertPage.getLayout = function getLayout(page: ReactElement) {
   return <PageLayout>{page}</PageLayout>;
 };

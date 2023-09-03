@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 
 import { useRouter } from "next/router";
 import { Box, Log } from "@frenchies-spots/material";
@@ -31,6 +31,6 @@ const SpotDetailPage = () => {
 
 export default SpotDetailPage;
 
-SpotDetailPage.getLayout = function getLayout(page) {
+SpotDetailPage.getLayout = function getLayout(page: ReactElement) {
   return <PageLayout>{page}</PageLayout>;
 };

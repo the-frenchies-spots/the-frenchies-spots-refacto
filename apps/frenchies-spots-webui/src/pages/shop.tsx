@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { PageLayout } from "../components";
 
 const Shop = () => {
@@ -7,6 +7,6 @@ const Shop = () => {
 
 export default Shop;
 
-Shop.getLayout = function getLayout(page) {
+Shop.getLayout = function getLayout(page: ReactElement) {
   return <PageLayout>{page}</PageLayout>;
 };

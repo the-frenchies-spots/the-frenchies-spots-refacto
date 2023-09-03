@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 
 import { Text } from "@frenchies-spots/material";
 
@@ -10,6 +10,6 @@ const FavoritPage = () => {
 
 export default FavoritPage;
 
-FavoritPage.getLayout = function getLayout(page) {
+FavoritPage.getLayout = function getLayout(page: ReactElement) {
   return <PageLayout>{page}</PageLayout>;
 };

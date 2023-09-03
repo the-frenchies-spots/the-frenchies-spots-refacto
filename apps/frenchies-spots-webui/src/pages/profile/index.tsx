@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 
 import { PageLayout } from "../../components/Layout/PageLayout/PageLayout";
 
@@ -8,6 +8,6 @@ const Profile = () => {
 
 export default Profile;
 
-Profile.getLayout = function getLayout(page) {
+Profile.getLayout = function getLayout(page: ReactElement) {
   return <PageLayout>{page}</PageLayout>;
 };
