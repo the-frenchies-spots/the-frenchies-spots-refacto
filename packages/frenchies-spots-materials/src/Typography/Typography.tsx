@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import { Sx, Text } from "@mantine/core";
 import Title from "./Title/Title";
+import { defaultColor } from "../utils";
 
 export enum TypographyVariants {
   "h1",
@@ -18,15 +19,17 @@ interface TypographyProps {
   children: ReactNode;
   variant?: keyof typeof TypographyVariants;
   sx?: Sx;
+  color?: keyof typeof defaultColor;
 }
 
 export const Typography = (props: TypographyProps) => {
-  const { children, variant = "body", sx } = props;
+  const { children, color, variant = "body", sx } = props;
 
   let Component: React.FC<{
     children: ReactNode;
     sx?: Sx;
     variant?: keyof typeof TypographyVariants;
+    color?: keyof typeof defaultColor & string;
   }>;
 
   switch (variant) {
@@ -44,7 +47,7 @@ export const Typography = (props: TypographyProps) => {
   }
 
   return (
-    <Component sx={sx} variant={variant}>
+    <Component sx={sx} variant={variant} color={color}>
       {children}
     </Component>
   );

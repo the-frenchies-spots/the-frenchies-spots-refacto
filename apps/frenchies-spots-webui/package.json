@@ -15,6 +15,7 @@
     "@frenchies-spots/map": "workspace:*",
     "@frenchies-spots/material": "workspace:*",
     "@frenchies-spots/utils": "workspace:*",
+    "@frenchies-spots/icon": "workspace:*",
     "@types/lodash": "^4.14.191",
     "@types/node": "20.5.6",
     "@types/react": "18.2.21",

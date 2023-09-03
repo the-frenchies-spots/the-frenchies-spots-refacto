@@ -45,7 +45,7 @@ export const CurrentLocationMarker = (props: MapMarkerProps) => {
             width: 15,
           }}
         />
-        <Box sx={{ position: "absolute", top: -20, left: -20 }}>
+        <Box sx={{ position: "absolute", top: -22, left: -22 }}>
           <Box sx={{ position: "relative" }}>
             <Circle style={{ position: "absolute" }} />
             <Circle style={{ animationDelay: "1.5s", position: "absolute" }} />

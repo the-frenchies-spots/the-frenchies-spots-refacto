@@ -1,8 +1,9 @@
-import React, { ReactElement } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { ReactElement, useEffect } from "react";
 
 import { useRouter } from "next/router";
 import { Box, Log } from "@frenchies-spots/material";
-import { useQuery } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client";
 import {
   QuerySpotByPkArgs,
   SpotEntity,
@@ -15,15 +16,22 @@ const SpotDetailPage = () => {
   const router = useRouter();
   const { spotId } = router.query;
 
-  const { data } = useQuery<{ spotByPk: SpotEntity }, QuerySpotByPkArgs>(
-    queries.spotByPk,
-    {
-      variables: { id: `${spotId}` },
+  const [getSpotByPk, { data, loading }] = useLazyQuery<
+    { spotByPk: SpotEntity },
+    QuerySpotByPkArgs
+  >(queries.spotByPk);
+
+  useEffect(() => {
+    if (spotId !== undefined) {
+      getSpotByPk({
+        variables: { id: `${spotId}` },
+      });
     }
-  );
+  }, [spotId]);
 
   return (
     <Box>
+      <Log value={spotId} />
       <Log value={data} />
     </Box>
   );

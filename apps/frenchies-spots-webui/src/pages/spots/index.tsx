@@ -9,6 +9,7 @@ import { useGeoloc } from "@frenchies-spots/map";
 import SpotsUi from "@/components/SpotsUi/SpotsUi";
 import { SPOTS_DISPLAY_MODE } from "@/enum/spots-display-mode.enum";
 import { PageLayout } from "./../../components/Layout/PageLayout/PageLayout";
+import NavigationLayout from "../../components/Layout/NavigationLayout/NavigationLayout";
 
 const SpotsPage = () => {
   const [displayMode, setDisplayMode] = useState<SPOTS_DISPLAY_MODE>(
@@ -29,7 +30,7 @@ const SpotsPage = () => {
   };
 
   return (
-    <Box w="100%" h="100vh">
+    <Box w="100%" h="100%">
       <SpotsUi
         mode={displayMode}
         userPosition={userPosition}
@@ -40,7 +41,11 @@ const SpotsPage = () => {
 };
 
 SpotsPage.getLayout = function getLayout(page: ReactElement) {
-  return <PageLayout>{page}</PageLayout>;
+  return (
+    <PageLayout>
+      <NavigationLayout>{page}</NavigationLayout>
+    </PageLayout>
+  );
 };
 
 export default SpotsPage;

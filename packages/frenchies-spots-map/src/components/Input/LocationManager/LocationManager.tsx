@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Box, Stack } from "@frenchies-spots/material";
+import { Box } from "@frenchies-spots/material";
 import { AutocompleteAddress } from "./../AutocompleteAddress/AutocompleteAddress";
 import { LocationPicker } from "./../LocationPicker/LocationPicker";
 import { SelectRegion } from "../SelectRegion/SelectRegion";

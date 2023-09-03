@@ -11,8 +11,6 @@ export const spotByPk = gql`
       id
       isCanPark
       isHidden
-      lat
-      lng
       location
       name
       profileId
@@ -29,10 +27,12 @@ export const spotByPk = gql`
         url
       }
       tags {
-        category
-        id
-        name
-        tagPictureUrl
+        tag {
+          category
+          id
+          name
+          tagPictureUrl
+        }
       }
     }
   }
