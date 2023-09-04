@@ -14,6 +14,10 @@ export const spots = gql`
       name
       profileId
       region
+      spotPicture {
+        id
+        url
+      }
     }
   }
 `;

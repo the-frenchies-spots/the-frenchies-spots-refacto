@@ -4,3 +4,4 @@ export * from "./Forms";
 export * from "./InputCustom";
 export * from "./Layout";
 export * from "./HomePage/HomePage";
+export * from "./Spots";

@@ -6,8 +6,6 @@ import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
 // Import Swiper styles
 import "swiper/css";
 
-import { Button } from "@frenchies-spots/material";
-
 interface SwiperFormProps {
   children: ReactNode;
   onSubmit: FormEventHandler<HTMLFormElement>;

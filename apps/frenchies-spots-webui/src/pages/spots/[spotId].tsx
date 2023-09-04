@@ -2,7 +2,15 @@
 import React, { ReactElement, useEffect } from "react";
 
 import { useRouter } from "next/router";
-import { Box, Log } from "@frenchies-spots/material";
+import {
+  Box,
+  Container,
+  Image,
+  LoadingOverlay,
+  Log,
+  Stack,
+  Text,
+} from "@frenchies-spots/material";
 import { useLazyQuery } from "@apollo/client";
 import {
   QuerySpotByPkArgs,
@@ -11,6 +19,8 @@ import {
   queries,
 } from "@frenchies-spots/gql";
 import { PageLayout } from "../../components/Layout/PageLayout/PageLayout";
+import SpotPicture from "./../../components/Spots/SpotPicture/SpotPicture";
+import SpotPictureSwiper from "../../components/Spots/SpotPictureSwiper/SpotPictureSwiper";
 
 const SpotDetailPage = () => {
   const router = useRouter();
@@ -30,10 +40,21 @@ const SpotDetailPage = () => {
   }, [spotId]);
 
   return (
-    <Box>
-      <Log value={spotId} />
-      <Log value={data} />
-    </Box>
+    <>
+      <LoadingOverlay visible={loading} />
+      {data?.spotByPk && (
+        <Container size="md" p={0}>
+          <SpotPictureSwiper pictures={data.spotByPk?.spotPicture} />
+          <Stack p="md">
+            <Text>{data.spotByPk?.name}</Text>
+            <Text>{data.spotByPk?.address}</Text>
+
+            <Text>Description</Text>
+            <Text>{data.spotByPk?.description}</Text>
+          </Stack>
+        </Container>
+      )}
+    </>
   );
 };
 

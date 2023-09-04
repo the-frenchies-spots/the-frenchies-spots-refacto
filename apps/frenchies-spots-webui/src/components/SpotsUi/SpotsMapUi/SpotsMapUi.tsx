@@ -11,11 +11,11 @@ import { SpotEntity } from "@frenchies-spots/gql";
 import type { TCoordinate } from "@frenchies-spots/map";
 
 interface SpotsMapUiProps {
-  spotList: SpotEntity[] | undefined;
+  list: SpotEntity[] | undefined;
   userPosition: TCoordinate | null;
 }
 
-const SpotsMapUi = ({ spotList, userPosition }: SpotsMapUiProps) => {
+const SpotsMapUi = ({ list, userPosition }: SpotsMapUiProps) => {
   const { viewport, onViewportChange, onCoordinateClick } = useMap();
 
   useEffect(() => {
@@ -47,7 +47,7 @@ const SpotsMapUi = ({ spotList, userPosition }: SpotsMapUiProps) => {
         <CurrentLocationMarker lat={userPosition.lat} lng={userPosition.lng} />
       )}
 
-      {spotList?.map((spot) => {
+      {list?.map((spot) => {
         const { id, location } = spot;
         const [lng, lat] = location.coordinates;
         return <MapMarker key={id} lat={lat} lng={lng} />;
