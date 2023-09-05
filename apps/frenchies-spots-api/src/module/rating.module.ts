@@ -5,10 +5,10 @@ import { TokenService } from 'src/service/token.service';
 import { PrismaService } from 'src/service/prisma.service';
 import { RatingBusiness } from 'src/business/rating.business';
 import { RatingResolver } from 'src/resolver/rating.resolver';
-import { AccessTokenGuard } from 'src/guard/accessToken.guard';
+import { PublicTokenGuard } from 'src/guard/publicToken.guard';
 import { SpotRepository } from 'src/repository/spot.repository';
 import { RatingRepository } from 'src/repository/rating.repository';
-import { AccessTokenStrategy } from 'src/strategy/accessToken.strategy';
+import { PublicTokenStrategy } from 'src/strategy/publicToken.strategy';
 import { RefreshTokenStrategy } from 'src/strategy/refreshToken.strategy';
 
 @Module({
@@ -20,8 +20,8 @@ import { RefreshTokenStrategy } from 'src/strategy/refreshToken.strategy';
     JwtService,
     TokenService,
     PrismaService,
-    AccessTokenGuard,
-    AccessTokenStrategy,
+    PublicTokenGuard,
+    PublicTokenStrategy,
     RefreshTokenStrategy,
   ],
 })

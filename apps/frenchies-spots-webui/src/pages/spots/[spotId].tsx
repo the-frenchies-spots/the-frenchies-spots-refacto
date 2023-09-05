@@ -8,6 +8,7 @@ import {
   Image,
   LoadingOverlay,
   Log,
+  Rating,
   Stack,
   Text,
 } from "@frenchies-spots/material";
@@ -21,6 +22,7 @@ import {
 import { PageLayout } from "../../components/Layout/PageLayout/PageLayout";
 import SpotPicture from "./../../components/Spots/SpotPicture/SpotPicture";
 import SpotPictureSwiper from "../../components/Spots/SpotPictureSwiper/SpotPictureSwiper";
+import SpotRating from "../../components/Spots/SpotRating/SpotRating";
 
 const SpotDetailPage = () => {
   const router = useRouter();
@@ -47,8 +49,8 @@ const SpotDetailPage = () => {
           <SpotPictureSwiper pictures={data.spotByPk?.spotPicture} />
           <Stack p="md">
             <Text>{data.spotByPk?.name}</Text>
+            <SpotRating />
             <Text>{data.spotByPk?.address}</Text>
-
             <Text>Description</Text>
             <Text>{data.spotByPk?.description}</Text>
           </Stack>

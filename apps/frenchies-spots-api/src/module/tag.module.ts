@@ -6,8 +6,8 @@ import { TagBusiness } from 'src/business/tag.business';
 import { TokenService } from 'src/service/token.service';
 import { PrismaService } from 'src/service/prisma.service';
 import { TagRepository } from 'src/repository/tag.repository';
-import { AccessTokenGuard } from 'src/guard/accessToken.guard';
-import { AccessTokenStrategy } from 'src/strategy/accessToken.strategy';
+import { PublicTokenGuard } from 'src/guard/publicToken.guard';
+import { PublicTokenStrategy } from 'src/strategy/publicToken.strategy';
 import { RefreshTokenStrategy } from 'src/strategy/refreshToken.strategy';
 
 @Module({
@@ -18,8 +18,8 @@ import { RefreshTokenStrategy } from 'src/strategy/refreshToken.strategy';
     JwtService,
     TokenService,
     PrismaService,
-    AccessTokenGuard,
-    AccessTokenStrategy,
+    PublicTokenGuard,
+    PublicTokenStrategy,
     RefreshTokenStrategy,
   ],
 })

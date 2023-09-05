@@ -8,7 +8,7 @@ import { CurrentProfileId } from 'src/decorator/currentProfileId.decorator.';
 import { UseGuards } from '@nestjs/common';
 import { RefreshTokenGuard } from 'src/guard/refreshToken.guard';
 import { SpotsInput } from 'src/dto/input/spot/spots-input';
-import { AccessTokenGuard } from 'src/guard/accessToken.guard';
+import { PublicTokenGuard } from 'src/guard/publicToken.guard';
 import { DeleteResponse } from 'src/dto/response/delete.response';
 
 @Resolver(() => SpotEntity)
@@ -17,17 +17,20 @@ export class SpotResolver {
 
   @Public()
   @Query(() => SpotEntity)
-  @UseGuards(RefreshTokenGuard)
+  @UseGuards(PublicTokenGuard)
   spotByPk(
     @Args('id', { type: () => String }) id: string,
     @CurrentProfileId() profileId: string | undefined,
   ): Promise<SpotEntity> {
+    console.log('===========================================');
+    console.log({ id, profileId });
+    console.log('===========================================');
     return this.spotBusiness.getById(id, profileId);
   }
 
   @Public()
   @Query(() => [SpotEntity])
-  @UseGuards(RefreshTokenGuard)
+  @UseGuards(PublicTokenGuard)
   spots(
     @Args('spotsInput') spotsInput: SpotsInput,
     @CurrentProfileId() profileId: string | undefined,

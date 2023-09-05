@@ -8,10 +8,7 @@ import { Request } from 'express';
 import { validateToken } from './validate-token';
 
 @Injectable()
-export class RefreshTokenStrategy extends PassportStrategy(
-  Strategy,
-  'jwt-refresh',
-) {
+export class PublicTokenStrategy extends PassportStrategy(Strategy, 'jwt') {
   constructor(public config: ConfigService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),

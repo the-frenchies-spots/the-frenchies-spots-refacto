@@ -7,10 +7,10 @@ import { TokenService } from 'src/service/token.service';
 import { SpotResolver } from 'src/resolver/spot.resolver';
 import { SpotBusiness } from 'src/business/spot.business';
 import { PrismaService } from 'src/service/prisma.service';
-import { AccessTokenGuard } from 'src/guard/accessToken.guard';
+import { PublicTokenGuard } from 'src/guard/publicToken.guard';
 import { SpotRepository } from 'src/repository/spot.repository';
 import { CloudinaryService } from 'src/service/cloudinary.service';
-import { AccessTokenStrategy } from 'src/strategy/accessToken.strategy';
+import { PublicTokenStrategy } from 'src/strategy/publicToken.strategy';
 import { RefreshTokenStrategy } from 'src/strategy/refreshToken.strategy';
 import { SpotGeospatialService } from 'src/service/spot-geospatial.service';
 
@@ -25,8 +25,8 @@ import { SpotGeospatialService } from 'src/service/spot-geospatial.service';
     PrismaService,
     CloudinaryService,
     SpotGeospatialService,
-    AccessTokenGuard,
-    AccessTokenStrategy,
+    PublicTokenGuard,
+    PublicTokenStrategy,
     RefreshTokenStrategy,
   ],
 })

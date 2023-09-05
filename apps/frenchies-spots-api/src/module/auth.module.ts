@@ -7,9 +7,9 @@ import { AuthResolver } from 'src/resolver/auth.resolver';
 import { AuthBusiness } from 'src/business/auth.business';
 import { AuthRepository } from 'src/repository/auth.repository';
 
-import { AccessTokenStrategy } from '../strategy/accessToken.strategy';
+import { PublicTokenStrategy } from '../strategy/publicToken.strategy';
 import { RefreshTokenStrategy } from '../strategy/refreshToken.strategy';
-import { AccessTokenGuard } from 'src/guard/accessToken.guard';
+import { PublicTokenGuard } from 'src/guard/publicToken.guard';
 import { PassportModule } from '@nestjs/passport';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { RefreshTokenGuard } from 'src/guard/refreshToken.guard';
@@ -32,15 +32,15 @@ import { RefreshTokenGuard } from 'src/guard/refreshToken.guard';
     JwtService,
     TokenService,
     PrismaService,
-    AccessTokenStrategy,
+    PublicTokenStrategy,
     RefreshTokenStrategy,
-    AccessTokenGuard,
+    PublicTokenGuard,
     RefreshTokenGuard,
   ],
   exports: [
-    AccessTokenGuard,
+    PublicTokenGuard,
     RefreshTokenGuard,
-    AccessTokenStrategy,
+    PublicTokenStrategy,
     RefreshTokenStrategy,
   ],
 })

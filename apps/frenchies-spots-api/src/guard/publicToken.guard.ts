@@ -5,12 +5,12 @@ import { GqlExecutionContext } from '@nestjs/graphql';
 import { ExecutionContext, Injectable } from '@nestjs/common';
 
 @Injectable()
-export class AccessTokenGuard extends AuthGuard('jwt') {
+export class PublicTokenGuard extends AuthGuard('jwt') {
   constructor(private reflector: Reflector) {
     super();
   }
 
-  getRequest(context: ExecutionContext): any {
+  getRequest(context: ExecutionContext) {
     const ctx = GqlExecutionContext.create(context);
     return ctx.getContext().req;
   }
@@ -18,12 +18,17 @@ export class AccessTokenGuard extends AuthGuard('jwt') {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
+    const request = this.getRequest(context);
+
     const isPublic = this.reflector.getAllAndOverride<boolean>('isPublic', [
       context.getHandler(),
       context.getClass(),
     ]);
 
     if (isPublic) {
+      if (request?.rawHeaders?.join()?.includes('Bearer')) {
+        return super.canActivate(context);
+      }
       return true;
     }
 
