@@ -1,16 +1,27 @@
 import React, { ReactElement, useState } from "react";
 
 import { useQuery } from "@apollo/client";
-import { Box, Button, Log } from "@frenchies-spots/material";
+import { Box, Button, Log, createStyles } from "@frenchies-spots/material";
 import { queries, SpotEntity, SpotsInput } from "@frenchies-spots/gql";
 import { useGeoloc } from "@frenchies-spots/map";
 
-import { useStyles } from "./SpotsPage.styles";
 import SpotsUi from "@/components/SpotsUi/SpotsUi";
 import { SPOTS_DISPLAY_MODE } from "@/enum/spots-display-mode.enum";
 import { PageLayout } from "./../../components/Layout/PageLayout/PageLayout";
 import NavigationLayout from "../../components/Layout/NavigationLayout/NavigationLayout";
 import SpotMenu from "../../components/SpotsUi/SpotMenu/SpotMenu";
+
+export const useStyles = createStyles((theme) => ({
+  container: { position: "relative" },
+  spotMenu: {
+    zIndex: 1,
+    position: "absolute",
+    width: "100%",
+    top: 0,
+    left: 0,
+    right: 0,
+  },
+}));
 
 const SpotsPage = () => {
   const [displayMode, setDisplayMode] = useState<SPOTS_DISPLAY_MODE>(
