@@ -10,7 +10,7 @@ import type { ContainerProps } from "@frenchies-spots/material";
 
 import { SPOTS_DISPLAY_MODE } from "@/enum/spots-display-mode.enum";
 
-interface SpotMenuProps extends ContainerProps {
+interface SpotMenuProps extends Omit<ContainerProps, "onChange"> {
   onChange?: (displayMode: SPOTS_DISPLAY_MODE) => void;
 }
 
