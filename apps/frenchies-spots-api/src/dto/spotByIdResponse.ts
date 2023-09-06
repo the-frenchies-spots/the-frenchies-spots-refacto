@@ -1,15 +1,9 @@
-import { Field, InputType } from '@nestjs/graphql';
-import { IsNumber, ValidateNested } from 'class-validator';
+import { Field, ObjectType } from '@nestjs/graphql';
 import { SpotEntity } from 'src/entity/spot.entity';
+import { RatingResponse } from './response/rating-response';
 
-class CountRatingDto {
-  @IsNumber()
-  ratings: number;
-}
-
-@InputType()
+@ObjectType()
 export class SpotByIdResponse extends SpotEntity {
-  @Field()
-  @ValidateNested()
-  _count: CountRatingDto;
+  @Field(() => RatingResponse, { nullable: true })
+  rating?: RatingResponse;
 }

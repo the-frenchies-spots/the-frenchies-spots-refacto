@@ -10,6 +10,7 @@ import { DeleteResponse } from 'src/dto/response/delete.response';
 import { CloudinaryService } from 'src/service/cloudinary.service';
 import { SpotGeospatialService } from 'src/service/spot-geospatial.service';
 import { SpotPictureEntity } from 'src/entity/spot-picture.entity';
+import { SpotByIdResponse } from 'src/dto/spotByIdResponse';
 
 const { SPOT_NOT_FOUND, SPOT_ID_NOT_MATCH_PROFILE_ID } = codeErrors;
 
@@ -24,7 +25,7 @@ export class SpotBusiness {
   async getById(
     id: string,
     profileId?: string | undefined,
-  ): Promise<SpotEntity> {
+  ): Promise<SpotByIdResponse> {
     return this.spotRepository.getById(id, profileId);
   }
 

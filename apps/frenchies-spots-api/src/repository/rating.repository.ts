@@ -17,6 +17,7 @@ export class RatingRepository {
     profileId: string,
   ): Promise<RatingEntity> {
     const { rate, ratingId, spotId } = ratingInput;
+
     const rating = await this.prisma.rating.upsert({
       where: { id: ratingId || new ObjectId().toString() },
       update: { rate, profileId },

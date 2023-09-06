@@ -3,8 +3,8 @@ import { RatingEntity } from 'src/entity/rating.entity';
 
 @ObjectType()
 export class RatingResponse {
-  @Field()
-  currentRating: RatingEntity;
+  @Field({ nullable: true })
+  currentRating?: RatingEntity;
 
   @Field()
   avg: number;

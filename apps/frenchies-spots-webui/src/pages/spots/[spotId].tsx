@@ -15,8 +15,7 @@ import {
 import { useLazyQuery } from "@apollo/client";
 import {
   QuerySpotByPkArgs,
-  SpotEntity,
-  SpotsInput,
+  SpotByIdResponse,
   queries,
 } from "@frenchies-spots/gql";
 import { PageLayout } from "../../components/Layout/PageLayout/PageLayout";
@@ -29,7 +28,7 @@ const SpotDetailPage = () => {
   const { spotId } = router.query;
 
   const [getSpotByPk, { data, loading }] = useLazyQuery<
-    { spotByPk: SpotEntity },
+    { spotByPk: SpotByIdResponse },
     QuerySpotByPkArgs
   >(queries.spotByPk);
 
@@ -49,7 +48,7 @@ const SpotDetailPage = () => {
           <SpotPictureSwiper pictures={data.spotByPk?.spotPicture} />
           <Stack p="md">
             <Text>{data.spotByPk?.name}</Text>
-            <SpotRating />
+            <SpotRating id={data.spotByPk?.id} rating={data.spotByPk?.rating} />
             <Text>{data.spotByPk?.address}</Text>
             <Text>Description</Text>
             <Text>{data.spotByPk?.description}</Text>

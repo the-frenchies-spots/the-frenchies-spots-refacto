@@ -14,11 +14,15 @@ export const spotByPk = gql`
       location
       name
       profileId
-      ratings {
-        id
-        profileId
-        rate
-        spotId
+      rating {
+        avg
+        maxVote
+        currentRating {
+          id
+          profileId
+          rate
+          spotId
+        }
       }
       region
       spotPicture {

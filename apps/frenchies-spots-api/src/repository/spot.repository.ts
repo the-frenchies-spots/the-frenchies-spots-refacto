@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { SpotPictureInput } from 'src/dto/input/spot-picture/spot-picture-input';
 import { SpotInput } from 'src/dto/input/spot/spot-input';
 import { SpotsInput } from 'src/dto/input/spot/spots-input';
+import { RatingResponse } from 'src/dto/response/rating-response';
+import { SpotByIdResponse } from 'src/dto/spotByIdResponse';
 import { SpotPictureEntity } from 'src/entity/spot-picture.entity';
 import { SpotEntity } from 'src/entity/spot.entity';
 import { PrismaService } from 'src/service/prisma.service';
@@ -19,7 +21,7 @@ export class SpotRepository {
   async getById(
     id: string,
     profileId?: string | undefined,
-  ): Promise<SpotEntity> {
+  ): Promise<SpotByIdResponse> {
     const spot = await this.prisma.spot.findUnique({
       where: {
         id,
@@ -48,7 +50,16 @@ export class SpotRepository {
       },
     });
 
-    return plainToClass(spot, SpotEntity);
+    const spotByIdResponse = {
+      ...spot,
+      rating: {
+        currentRating: spot?.ratings?.length ? spot.ratings[0] : null,
+        maxVote: spot?._count?.ratings,
+        avg: spot?.averageRating,
+      },
+    };
+
+    return plainToClass(spotByIdResponse, SpotByIdResponse);
   }
 
   async getAll(

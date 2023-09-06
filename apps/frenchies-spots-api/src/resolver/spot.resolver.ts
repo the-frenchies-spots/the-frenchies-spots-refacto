@@ -10,21 +10,19 @@ import { RefreshTokenGuard } from 'src/guard/refreshToken.guard';
 import { SpotsInput } from 'src/dto/input/spot/spots-input';
 import { PublicTokenGuard } from 'src/guard/publicToken.guard';
 import { DeleteResponse } from 'src/dto/response/delete.response';
+import { SpotByIdResponse } from 'src/dto/spotByIdResponse';
 
 @Resolver(() => SpotEntity)
 export class SpotResolver {
   constructor(private readonly spotBusiness: SpotBusiness) {}
 
   @Public()
-  @Query(() => SpotEntity)
+  @Query(() => SpotByIdResponse)
   @UseGuards(PublicTokenGuard)
   spotByPk(
     @Args('id', { type: () => String }) id: string,
     @CurrentProfileId() profileId: string | undefined,
-  ): Promise<SpotEntity> {
-    console.log('===========================================');
-    console.log({ id, profileId });
-    console.log('===========================================');
+  ): Promise<SpotByIdResponse> {
     return this.spotBusiness.getById(id, profileId);
   }
 

@@ -135,7 +135,7 @@ export type ProfileEntity = {
 export type Query = {
   __typename?: 'Query';
   getLoginUser: UserEntity;
-  spotByPk: SpotEntity;
+  spotByPk: SpotByIdResponse;
   spots: Array<SpotEntity>;
   spotsProfile: Array<FavoriteEntity>;
   tagByPk: TagEntity;
@@ -183,7 +183,7 @@ export type RatingInput = {
 export type RatingResponse = {
   __typename?: 'RatingResponse';
   avg: Scalars['Float']['output'];
-  currentRating: RatingEntity;
+  currentRating?: Maybe<RatingEntity>;
   maxVote: Scalars['Float']['output'];
 };
 
@@ -203,6 +203,29 @@ export type SignUpInput = {
   email: Scalars['String']['input'];
   password: Scalars['String']['input'];
   pseudo: Scalars['String']['input'];
+};
+
+export type SpotByIdResponse = {
+  __typename?: 'SpotByIdResponse';
+  address: Scalars['String']['output'];
+  averageRating: Scalars['Float']['output'];
+  category: Scalars['String']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  description: Scalars['String']['output'];
+  favorites?: Maybe<Array<FavoriteEntity>>;
+  id: Scalars['String']['output'];
+  isCanPark: Scalars['Boolean']['output'];
+  isHidden: Scalars['Boolean']['output'];
+  location?: Maybe<Scalars['JSON']['output']>;
+  name: Scalars['String']['output'];
+  profile: ProfileEntity;
+  profileId: Scalars['String']['output'];
+  rating: RatingResponse;
+  ratings?: Maybe<Array<RatingEntity>>;
+  region: Scalars['String']['output'];
+  spotPicture?: Maybe<Array<SpotPictureEntity>>;
+  tags?: Maybe<Array<TagOnSpotEntity>>;
+  updatedAt: Scalars['DateTime']['output'];
 };
 
 export type SpotEntity = {

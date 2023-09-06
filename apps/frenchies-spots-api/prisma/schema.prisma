@@ -118,7 +118,7 @@ model SpotPicture {
 
 model Rating {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  rate      Int
+  rate      Float
   profile   Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
   profileId String   @unique @db.ObjectId
   spot      Spot     @relation(fields: [spotId], references: [id], onDelete: Cascade)
