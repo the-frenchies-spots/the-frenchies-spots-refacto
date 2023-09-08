@@ -18,6 +18,15 @@ export const spots = gql`
         id
         url
       }
+      favorites {
+        id
+        spotId
+      }
+      ratings {
+        id
+        rate
+        spotId
+      }
     }
   }
 `;

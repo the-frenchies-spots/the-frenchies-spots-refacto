@@ -12,6 +12,7 @@ import { Rating, Group, Text, Log, Loader } from "@frenchies-spots/material";
 type SpotRatingProps = Pick<SpotByIdResponse, "rating" | "id">;
 
 const SpotRating = ({ id: spotId, rating: initRating }: SpotRatingProps) => {
+  console.log({ initRating });
   const [rating, setRating] = useState<RatingResponse>(initRating);
 
   const [insertRate, { loading }] = useMutation<
@@ -46,7 +47,7 @@ const SpotRating = ({ id: spotId, rating: initRating }: SpotRatingProps) => {
       <Rating
         fractions={5}
         onChange={handleRatingChange}
-        defaultValue={+(rating?.currentRating?.rate?.toFixed(2) || 0)}
+        value={+(rating?.currentRating?.rate?.toFixed(2) || 0)}
         color="lime"
         size="lg"
       />

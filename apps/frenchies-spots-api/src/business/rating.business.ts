@@ -27,7 +27,7 @@ export class RatingBusiness {
   ): Promise<RatingResponse> {
     const { rate, spotId } = ratingInput;
 
-    if (rate < 1 || rate > 5) throw new ErrorService(RATING_OUT_OF_RANGE);
+    if (rate < 0 || rate > 5) throw new ErrorService(RATING_OUT_OF_RANGE);
 
     const spot = await this.spotRepository.getById(spotId);
 
